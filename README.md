@@ -10,4 +10,4 @@ $ stack exec site build
 $ stack exec site watch
 ```
 
-http://localhost:8080 にサーバーが立ち上がり，Previewが見れる．
+http://localhost:8000 にサーバーが立ち上がり，Previewが見れる．
