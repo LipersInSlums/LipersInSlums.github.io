@@ -51,6 +51,12 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
     needs: build
     steps:
+    - name: Generate token
+      id: generate_token
+      uses: tibdex/github-app-token@v1
+      with:
+        app_id: ${{ secrets.APP_ID }}
+        private_key: ${{ secrets.PRIVATE_KEY }}
     - name: Download a public
       uses: actions/download-artifact@v2
       with:
@@ -58,8 +64,10 @@ jobs:
         path: public
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
+      env:
+        TOKEN: ${{ steps.generate_token.outputs.token }}
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ TOKEN }}
         publish_dir: ./public
 
 
