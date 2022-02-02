@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "LipersInSlums-Wiki:lib"
+
+    - path: "./app/Main.hs"
+      component: "LipersInSlums-Wiki:exe:site"
+
+    - path: "./app/Paths_LipersInSlums_Wiki.hs"
+      component: "LipersInSlums-Wiki:exe:site"
+
+    - path: "./test"
+      component: "LipersInSlums-Wiki:test:site-test"
