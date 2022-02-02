@@ -91,10 +91,18 @@ pandocReaderOptions :: Pd.ReaderOptions
 pandocReaderOptions =
   defaultHakyllReaderOptions
     { Pd.readerExtensions =
-        Pd.enableExtension Pd.Ext_east_asian_line_breaks $
-          Pd.enableExtension Pd.Ext_emoji $
-            Pd.disableExtension Pd.Ext_citations $
-              Pd.readerExtensions defaultHakyllReaderOptions
+        Pd.readerExtensions defaultHakyllReaderOptions
+          <> Pd.extensionsFromList
+            [ Pd.Ext_tex_math_double_backslash
+            , Pd.Ext_tex_math_single_backslash
+            , Pd.Ext_tex_math_dollars
+            , Pd.Ext_latex_macros
+            , Pd.Ext_inline_code_attributes
+            , Pd.Ext_abbreviations
+            , Pd.Ext_east_asian_line_breaks
+            , Pd.Ext_emoji
+            , Pd.Ext_citations
+            ]
     }
 
 pandocWriterOptions :: Pd.WriterOptions
@@ -102,7 +110,7 @@ pandocWriterOptions =
   defaultHakyllWriterOptions
     { Pd.writerNumberSections = True
     , Pd.writerTableOfContents = True
-    , Pd.writerHTMLMathMethod = Pd.KaTeX ""
+    , Pd.writerHTMLMathMethod = Pd.MathJax ""
     , Pd.writerTemplate = Just tocTemplate
     }
 
