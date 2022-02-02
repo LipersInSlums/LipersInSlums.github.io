@@ -4,6 +4,8 @@
 
 ## Getting Started
 
+[Stack](https://docs.haskellstack.org/en/stable/README/)はインストールしてあるものとする．
+
 ```shell
 $ stack build
 $ stack exec site build
