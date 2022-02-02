@@ -65,7 +65,7 @@ main = hakyllWith hakyllConfig $ do
 
       pandocCompilerWith
         pandocReaderOptions
-        defaultHakyllWriterOptions
+        pandocWriterOptions
         >>= loadAndApplyTemplate postTemplate postsCtx
         >>= saveSnapshot "content"
         >>= loadAndApplyTemplate defaultTemplate postsCtx
@@ -102,20 +102,23 @@ pandocWriterOptions =
   defaultHakyllWriterOptions
     { Pd.writerNumberSections = True
     , Pd.writerTableOfContents = True
-    , Pd.writerTOCDepth = 2
     , Pd.writerHTMLMathMethod = Pd.KaTeX ""
     , Pd.writerTemplate = Just tocTemplate
     }
 
 tocTemplate :: Pd.Template T.Text
 tocTemplate =
-  either error id . runIdentity . Pd.compileTemplate "" $
-    T.unlines
-      [ "<div class=\"toc\"><div class=\"header\">Table of Contents</div>"
-      , "$toc$"
-      , "</div>"
-      , "$body$"
-      ]
+  either error id $
+    either (error . show) id $
+      Pd.runPure $
+        Pd.runWithDefaultPartials $
+          Pd.compileTemplate "" $
+            T.unlines
+              [ "<div class=\"toc\"><div class=\"header\">Contents</div>"
+              , "$toc$"
+              , "</div>"
+              , "$body$"
+              ]
 
 defaultTemplate :: Identifier
 defaultTemplate = "templates/default.html"
