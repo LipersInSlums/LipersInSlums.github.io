@@ -4,7 +4,6 @@ module Main where
 
 import Control.Applicative (empty)
 import Control.Monad (filterM)
-import Data.Functor.Identity (runIdentity)
 import Data.Maybe (fromMaybe)
 import qualified Data.Text as T
 import Hakyll

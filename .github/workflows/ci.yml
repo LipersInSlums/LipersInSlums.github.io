@@ -10,6 +10,8 @@ jobs:
         plan:
         - ghc: '8.10.7'
           resolver: 'lts-18.23'
+        flags:
+        - "--pedantic --ghc-options=-O2"
     runs-on: ${{ matrix.os }}
     env:
       STACK: stack --no-terminal --system-ghc --resolver ${{ matrix.plan.resolver }}
