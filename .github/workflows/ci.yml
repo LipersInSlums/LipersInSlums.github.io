@@ -64,10 +64,8 @@ jobs:
         path: public
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
-      env:
-        TOKEN: ${{ steps.generate_token.outputs.token }}
       with:
-        github_token: ${{ TOKEN }}
+        github_token: ${{ steps.generate_token.outputs.token }}
         publish_dir: ./public
 
 
