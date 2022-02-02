@@ -1,6 +1,8 @@
 resolver:
   url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/23.yaml
+
 packages:
 - .
+
 extra-deps:
 - hakyll-4.15.1.0

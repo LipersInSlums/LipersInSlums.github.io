@@ -1,6 +1,11 @@
 ---
 title: S.P.Q.R.
+author: hoge
+date: August 12, 2015
+year: 2015
 ---
+
+# First
 
 Mauris in lorem nisl. Maecenas tempus facilisis ante, eget viverra nisl
 tincidunt et. Donec turpis lectus, mattis ac malesuada a, accumsan eu libero.
@@ -15,6 +20,8 @@ mollis, dui nibh aliquam neque, at ultricies leo ligula et arcu. Proin et mi
 eget tellus sodales lobortis. Sed tempor, urna vel pulvinar faucibus, lectus
 urna vehicula ante, at facilisis dolor odio at lorem. Morbi vehicula euismod
 urna, et imperdiet urna ornare vitae.
+
+# Second
 
 Sed tincidunt sollicitudin ultrices. In hac habitasse platea dictumst. Morbi
 ligula lectus, egestas at ultricies nec, fringilla et tellus. Duis urna lorem,

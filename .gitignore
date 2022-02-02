@@ -1,2 +1,5 @@
-site/_cache
-**/.stack-work
+.stack-work/
+_cache/
+public/
+*.cabal
+.vscode/

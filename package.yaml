@@ -1,0 +1,43 @@
+name:                LipersInSlums-Wiki
+version:             0.1.0.0
+github:              "LipersInSlums/LipersInSlums.github.io"
+license:             MIT
+author:              "LipersInSlums"
+maintainer:          "lugendre1904@gmail.com"
+copyright:           "2022 LipersInSlums"
+
+extra-source-files:
+- README.md
+
+description:         Please see the README on GitHub at <https://github.com/LipersInSlums/LipersInSlums.github.io#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- hakyll
+- pandoc
+- text
+
+library:
+  source-dirs: src
+
+executables:
+  site:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - LipersInSlums-Wiki
+
+tests:
+  site-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - LipersInSlums-Wiki

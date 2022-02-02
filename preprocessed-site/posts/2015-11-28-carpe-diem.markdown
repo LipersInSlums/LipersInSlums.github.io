@@ -1,5 +1,8 @@
 ---
 title: Carpe Diem
+author: hoge
+date: November 28, 2015
+year: 2015
 ---
 
 Fusce tortor quam, egestas in posuere quis, porttitor vel turpis. Donec

@@ -1,0 +1,26 @@
+<article>
+    <div class="container">
+        <div class="row">
+            <div id="post-content">
+                $body$
+            </div>
+        </div>
+        <div id="post-navigation" class="row">
+            <div>
+                $if(nextPostUrl)$
+                <i aria-hidden="true"></i>
+                <a href="$nextPostUrl$">$nextPostTitle$</a>
+                $endif$
+            </div>
+            <div>
+                <a href="/">トップに戻る</a>
+            </div>
+            <div>
+                $if(prevPostUrl)$
+                <a href="$prevPostUrl$">$prevPostTitle$</a>
+                <i aria-hidden="true"></i>
+                $endif$
+            </div>
+        </div>
+    </div>
+</article>
