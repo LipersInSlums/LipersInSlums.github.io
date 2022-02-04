@@ -136,8 +136,8 @@ postTemplate = "templates/post.html"
 -- | Create the description for open graph protocol using body string.
 createOpenGraphDescription :: Item a -> Compiler String
 createOpenGraphDescription _ = convert . itemBody <$> getResourceBody
- where
-  convert = take 200 . escapeHtml . concat . lines
+  where
+    convert = take 200 . escapeHtml . concat . lines
 
 -- | Create the HTML tags for the subheading and "Posted by" lines for a blog post.
 createSubHeadingContentForPost :: Item a -> Compiler String
