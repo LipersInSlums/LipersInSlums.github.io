@@ -4,9 +4,9 @@ import { getAllPosts, getPostBySlug } from "../../lib/api";
 import Head from "next/head";
 import markdownToHtml from "zenn-markdown-html";
 
-type Author = {
+interface Author {
   name: string;
-};
+}
 
 interface PostType {
   slug: string;
@@ -23,7 +23,7 @@ interface Props {
   preview?: boolean;
 }
 
-const Post: React.VFC<Props> = (props) => {
+export const Post: React.VFC<Props> = (props) => {
   const router = useRouter();
   if (!router.isFallback && !props.post?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -47,8 +47,6 @@ const Post: React.VFC<Props> = (props) => {
   );
 };
 
-export default Post;
-
 interface Params {
   params: {
     slug: string;
@@ -62,8 +60,6 @@ export async function getStaticProps({ params }: Params) {
     "slug",
     "author",
     "content",
-    "ogImage",
-    "coverImage",
   ]);
   const content = await markdownToHtml(post.content || "");
 
