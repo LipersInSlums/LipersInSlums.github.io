@@ -4,12 +4,12 @@
 
 ## Getting Started
 
-[Stack](https://docs.haskellstack.org/en/stable/README/)はインストールしてあるものとする．
+`nvm`, `yarn` はインストールしてあるものとする．
 
 ```shell
-$ stack build
-$ stack exec site build
-$ stack exec site watch
+$ nvm use
+$ yarn
+$ yarn dev
 ```
 
-http://localhost:8000 にサーバーが立ち上がり，Previewが見れる．
+http://localhost:3000 にサーバーが立ち上がり，Previewが見れる．
