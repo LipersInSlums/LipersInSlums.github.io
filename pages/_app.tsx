@@ -1,8 +1,22 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import initTwitterScriptInner from "zenn-embed-elements/lib/init-twitter-script-inner";
+import { useEffect } from "react";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+function CustomApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    import("zenn-embed-elements");
+  }, []);
+  return (
+    <>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: initTwitterScriptInner,
+        }}
+      />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
-export default MyApp
+export default CustomApp;
