@@ -29,6 +29,8 @@ jobs:
       run: yarn lint && yarn type-check
     - name: Build
       run: yarn build && yarn export
+    - name: add nojekyll
+      run: touch ./out/.nojekyll
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
