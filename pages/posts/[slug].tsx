@@ -23,7 +23,7 @@ interface Props {
   preview?: boolean;
 }
 
-export const Post: React.VFC<Props> = (props) => {
+const Post: React.VFC<Props> = (props) => {
   const router = useRouter();
   if (!router.isFallback && !props.post?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -46,6 +46,8 @@ export const Post: React.VFC<Props> = (props) => {
     </div>
   );
 };
+
+export default Post;
 
 interface Params {
   params: {
