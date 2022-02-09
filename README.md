@@ -4,12 +4,27 @@
 
 ## Getting Started
 
-`nvm`, `yarn` はインストールしてあるものとする．
+Tool Manager [Volta](https://volta.sh/) を利用する．
+
+- 準備:
 
 ```shell
-$ nvm use
-$ yarn
-$ yarn dev
+# install Volta
+$ curl https://get.volta.sh | bash
+
+# install the pinned version of node
+$ volta install node
+
+# install the pinned version of yarn
+$ volta install yarn
+
+# install dependencies
+$ yarn install
 ```
 
-http://localhost:3000 にサーバーが立ち上がり，Previewが見れる．
+- サイトの確認:
+
+```shell
+# http://localhost:3000 にサーバーが立ち上がり，Preview が見れる．
+$ yarn dev
+```
