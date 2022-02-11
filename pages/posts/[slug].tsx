@@ -4,28 +4,18 @@ import { getAllPosts, getPostBySlug } from "../../lib/api";
 import Head from "next/head";
 import markdownToHtml from "zenn-markdown-html";
 
-interface Author {
-  name: string;
-}
-
-interface PostType {
-  slug: string;
-  title: string;
-  date: string;
-  author: Author;
-  excerpt: string;
-  content: string;
-}
+import { Post } from "../../src/model/Post";
+import PostOGP from "../../src/components/common/PostOGP";
 
 interface Props {
-  post: PostType;
-  morePosts: PostType[];
+  post: Post;
+  morePosts: Post[];
   preview?: boolean;
 }
 
-const Post: React.VFC<Props> = (props) => {
+const Post: React.VFC<Props> = ({ post }) => {
   const router = useRouter();
-  if (!router.isFallback && !props.post?.slug) {
+  if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
   return (
@@ -36,10 +26,16 @@ const Post: React.VFC<Props> = (props) => {
       ) : (
         <>
           <article className="mb-32 znc">
+            <PostOGP
+              title={post.title}
+              description="hpge"
+              type="article"
+              url="http://localhost:3000"
+            />
             <Head>
-              <title>{props.post.title} | LipersInSlums Wiki</title>
+              <title>{post.title} | LipersInSlums Wiki</title>
             </Head>
-            <div dangerouslySetInnerHTML={{ __html: props.post.content }} />
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </article>
         </>
       )}
