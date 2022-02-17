@@ -1,7 +1,7 @@
 import React from "react";
-import { AppBar, Tabs, Tab, Tooltip } from "@mui/material";
-import AppBarExample from "src/components/templates/materials/AppBar";
-import DrawerExample from "src/components/templates/materials/Drawer";
+import { AppBar, Box, Tabs, Tab, Tooltip } from "@mui/material";
+import AppBarExample from "../../components/templates/materials/AppBar";
+import DrawerExample from "../../components/templates/materials/Drawer";
 import Copyright from "./materials/Copyright";
 
 interface TabPanelProps {
@@ -26,6 +26,13 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
 export const previewNavTabsId = "preview-nav-tabs";
 
 const MainWindow = () => {
@@ -44,17 +51,21 @@ const MainWindow = () => {
       <AppBarExample onDrawerButtonClick={handleOpenDrawer} />
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
         <AppBar position="static" id={previewNavTabsId}>
-          <Tabs
-            value={tabIndex}
-            onChange={handleChange}
-            variant="scrollable"
-            scrollButtons={true}
-            aria-label="preview-window-tabs"
-          >
-            <Tab label="HOME" />
-            <Tab label="DOCS" />
-            <Tab label="Blog" />
-          </Tabs>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs
+              value={tabIndex}
+              onChange={handleChange}
+              indicatorColor="secondary"
+              textColor="inherit"
+              variant="scrollable"
+              scrollButtons={true}
+              aria-label="preview-window-tabs"
+            >
+              <Tab label="HOME" {...a11yProps(0)} />
+              <Tab label="DOCS" {...a11yProps(1)} />
+              <Tab label="Blog" {...a11yProps(2)} />
+            </Tabs>
+          </Box>
         </AppBar>
       </Tooltip>
 
