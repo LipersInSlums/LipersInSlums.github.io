@@ -8,13 +8,13 @@
     "export": "next export",
     "lint": "next lint",
     "lint:fix": "eslint --fix --ext ts,tsx pages/ src/ && prettier --write pages/ src/",
-    "type-check": "tsc",
+    "type-check": "tsc --noEmit",
     "prepare": "husky install"
   },
   "dependencies": {
     "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.4.1",
-    "@mui/styled-engine": "npm:@mui/styled-engine-sc@^5.4.1",
+    "@mui/styles": "^5.4.2",
     "gray-matter": "^4.0.3",
     "next": "12.0.10",
     "react": "17.0.2",
@@ -26,6 +26,7 @@
     "zenn-markdown-html": "^0.1.106"
   },
   "devDependencies": {
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
     "@types/markdown-it": "*",
     "@types/node": "17.0.16",
     "@types/react": "17.0.39",
