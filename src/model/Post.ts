@@ -1,12 +1,12 @@
 export interface Post {
-  slug: string;
-  title: string;
-  date: string;
-  author: Author;
-  excerpt: string;
-  content: string;
+  readonly slug: string;
+  readonly title: string;
+  readonly date: string;
+  readonly author: Author;
+  readonly excerpt: string;
+  readonly content: string;
 }
 
 export interface Author {
-  name: string;
+  readonly name: string;
 }
