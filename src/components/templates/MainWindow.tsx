@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AppBar, Box, Tabs, Tab, Tooltip } from "@mui/material";
 import AppBarExample from "../../components/templates/materials/AppBar";
 import DrawerExample from "../../components/templates/materials/Drawer";
 import Copyright from "./materials/Copyright";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -29,14 +31,27 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
 export const previewNavTabsId = "preview-nav-tabs";
 
-const MainWindow = () => {
+const MainWindow = (props: { readonly children?: React.ReactNode }) => {
+  const { children } = props;
+  const router = useRouter();
   const [tabIndex, setTabIndex] = React.useState(0);
+
+  useEffect(() => {
+    if (router) {
+      const linkPath = router.asPath.split("/");
+      if (linkPath.includes("blog") || linkPath.includes("posts"))
+        setTabIndex(2);
+      else if (linkPath.includes("docs")) setTabIndex(1);
+      else setTabIndex(0);
+    }
+  }, [router]);
+
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const handleChange = (_: React.SyntheticEvent, newTabIndex: number) => {
@@ -51,7 +66,7 @@ const MainWindow = () => {
       <AppBarExample onDrawerButtonClick={handleOpenDrawer} />
       <Tooltip title={`<AppBar color="primary">`} placement="left" arrow>
         <AppBar position="static" id={previewNavTabsId}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={tabIndex}
               onChange={handleChange}
@@ -61,9 +76,15 @@ const MainWindow = () => {
               scrollButtons={true}
               aria-label="preview-window-tabs"
             >
-              <Tab label="HOME" {...a11yProps(0)} />
-              <Tab label="DOCS" {...a11yProps(1)} />
-              <Tab label="Blog" {...a11yProps(2)} />
+              <Link href="/" passHref>
+                <Tab label="HOME" {...a11yProps(0)} />
+              </Link>
+              <Link href="/docs" passHref>
+                <Tab label="DOCS" {...a11yProps(1)} />
+              </Link>
+              <Link href="/blog" passHref>
+                <Tab label="BLOG" {...a11yProps(2)} />
+              </Link>
             </Tabs>
           </Box>
         </AppBar>
@@ -72,13 +93,13 @@ const MainWindow = () => {
       <div>
         <DrawerExample open={drawerOpen} onClose={handleCloseDrawer} />
         <TabPanel value={tabIndex} index={0}>
-          <div>HomeInSlums</div>
+          <div>{children}</div>
         </TabPanel>
         <TabPanel value={tabIndex} index={1}>
-          <div>DocsInSlums</div>
+          <div>{children}</div>
         </TabPanel>
         <TabPanel value={tabIndex} index={2}>
-          <div>BlogInSlums</div>
+          <div>{children}</div>
         </TabPanel>
       </div>
       <Copyright />
