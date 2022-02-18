@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {AppBar, Box, Tabs, Tab, Tooltip } from "@mui/material";
+import { AppBar, Box, Tabs, Tab, Tooltip } from "@mui/material";
 import AppBarExample from "../../components/templates/materials/AppBar";
 import DrawerExample from "../../components/templates/materials/Drawer";
 import Breadcrumbs from "../../components/templates/materials/Breadcrumbs";
@@ -38,9 +38,9 @@ function a11yProps(index: number) {
 
 export const previewNavTabsId = "preview-nav-tabs";
 const tabs = [
-  {label: "HOME", href: "/"},
-  {label: "DOCS", href: "/docs"},
-  {label: "BLOG", href: "/blog"},
+  { label: "HOME", href: "/" },
+  { label: "DOCS", href: "/docs" },
+  { label: "BLOG", href: "/blog" },
 ];
 
 const MainWindow = (props: { readonly children?: React.ReactNode }) => {
@@ -48,6 +48,7 @@ const MainWindow = (props: { readonly children?: React.ReactNode }) => {
   const router = useRouter();
   const [tabIndex, setTabIndex] = React.useState(0);
 
+  // FIXME: 汚い
   useEffect(() => {
     if (router) {
       const linkPath = router.asPath.split("/");
@@ -96,11 +97,9 @@ const MainWindow = (props: { readonly children?: React.ReactNode }) => {
         <DrawerExample open={drawerOpen} onClose={handleCloseDrawer} />
         <Breadcrumbs />
         {tabs.map((tab, index) => (
-          <>
-            <TabPanel key={tab.label} value={tabIndex} index={index}>
-              {children}
-            </TabPanel>
-          </>
+          <TabPanel key={tab.label} value={tabIndex} index={index}>
+            {children}
+          </TabPanel>
         ))}
       </div>
       <Copyright />
