@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { AppBar, Box, Tabs, Tab, Tooltip } from "@mui/material";
+import {AppBar, Box, Tabs, Tab, Tooltip } from "@mui/material";
 import AppBarExample from "../../components/templates/materials/AppBar";
 import DrawerExample from "../../components/templates/materials/Drawer";
+import Breadcrumbs from "../../components/templates/materials/Breadcrumbs";
 import Copyright from "./materials/Copyright";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -36,6 +37,11 @@ function a11yProps(index: number) {
 }
 
 export const previewNavTabsId = "preview-nav-tabs";
+const tabs = [
+  {label: "HOME", href: "/"},
+  {label: "DOCS", href: "/docs"},
+  {label: "BLOG", href: "/blog"},
+];
 
 const MainWindow = (props: { readonly children?: React.ReactNode }) => {
   const { children } = props;
@@ -76,15 +82,11 @@ const MainWindow = (props: { readonly children?: React.ReactNode }) => {
               scrollButtons={true}
               aria-label="preview-window-tabs"
             >
-              <Link href="/" passHref>
-                <Tab label="HOME" {...a11yProps(0)} />
-              </Link>
-              <Link href="/docs" passHref>
-                <Tab label="DOCS" {...a11yProps(1)} />
-              </Link>
-              <Link href="/blog" passHref>
-                <Tab label="BLOG" {...a11yProps(2)} />
-              </Link>
+              {tabs.map((tab, index) => (
+                <Link href={tab.href} key={tab.label} passHref>
+                  <Tab label={tab.label} {...a11yProps(index)} />
+                </Link>
+              ))}
             </Tabs>
           </Box>
         </AppBar>
@@ -92,15 +94,14 @@ const MainWindow = (props: { readonly children?: React.ReactNode }) => {
 
       <div>
         <DrawerExample open={drawerOpen} onClose={handleCloseDrawer} />
-        <TabPanel value={tabIndex} index={0}>
-          <div>{children}</div>
-        </TabPanel>
-        <TabPanel value={tabIndex} index={1}>
-          <div>{children}</div>
-        </TabPanel>
-        <TabPanel value={tabIndex} index={2}>
-          <div>{children}</div>
-        </TabPanel>
+        <Breadcrumbs />
+        {tabs.map((tab, index) => (
+          <>
+            <TabPanel key={tab.label} value={tabIndex} index={index}>
+              {children}
+            </TabPanel>
+          </>
+        ))}
       </div>
       <Copyright />
     </>
