@@ -1,4 +1,4 @@
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build:
@@ -11,12 +11,12 @@ jobs:
           - node-version: "16.16.0"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: true
           fetch-depth: 0
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.plan.node-version }}
           cache: "yarn"
@@ -30,7 +30,7 @@ jobs:
       - name: add nojekyll
         run: touch ./out/.nojekyll
       - name: Archive artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.sha }}-out
           path: out
