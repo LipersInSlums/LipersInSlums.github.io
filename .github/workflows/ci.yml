@@ -8,43 +8,34 @@ jobs:
         os:
         - ubuntu-latest
         plan:
-        - ghc: '8.10.7'
-          resolver: 'lts-18.23'
-        flags:
-        - "--pedantic --ghc-options=-O2"
+        - node-version: '16.13.2'
     runs-on: ${{ matrix.os }}
     env:
-      STACK: stack --no-terminal --system-ghc --resolver ${{ matrix.plan.resolver }}
       FLAGS: ${{ matrix.flags }}
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: true
         fetch-depth: 0
-    - name: Setup Haskell
-      uses: haskell/actions/setup@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
       with:
-        ghc-version: ${{ matrix.plan.ghc.plan }}
-        enable-stack: true
-        stack-version: latest
-    - uses: actions/cache@v2
-      with:
-        path: ~/.stack
-        key: ${{ runner.os }}-stack-${{ hashFiles('stack.yaml') }}-${{ matrix.plan.resolver }}
+        node-version: ${{ matrix.plan.node-version }}
+        cache: 'yarn'
+        cache-dependency-path: ./yarn.lock
     - name: Install dependencies
-      run: $STACK test --bench --only-dependencies $FLAGS
+      run: yarn
+    - name: Lint & Type check
+      run: yarn lint && yarn type-check
     - name: Build
-      run: |
-        $STACK build --bench --haddock --no-haddock-deps $FLAGS
-        $STACK exec site clean
-        $STACK exec site build
-    - name: Test
-      run: $STACK -j 1 test --bench --no-run-benchmarks --haddock --no-haddock-deps $FLAGS
+      run: yarn build && yarn export
+    - name: add nojekyll
+      run: touch ./out/.nojekyll
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ github.sha }}-public
-        path: public
+        name: ${{ github.sha }}-out
+        path: out
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,13 +51,13 @@ jobs:
     - name: Download a public
       uses: actions/download-artifact@v2
       with:
-        name: ${{ github.sha }}-public
-        path: public
+        name: ${{ github.sha }}-out
+        path: out
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ steps.generate_token.outputs.token }}
-        publish_dir: ./public
+        publish_dir: ./out
 
 
 
