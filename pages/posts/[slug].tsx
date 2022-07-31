@@ -13,7 +13,7 @@ interface Props {
   preview?: boolean;
 }
 
-const Post: React.VFC<Props> = ({ post }) => {
+const Post = ({ post }: Props) => {
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;

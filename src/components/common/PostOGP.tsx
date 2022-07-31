@@ -9,12 +9,7 @@ type Props = {
   url: string;
 };
 
-const PostOGP: React.VFC<Props> = ({
-  title,
-  type,
-  description,
-  url,
-}: Props) => (
+const PostOGP = ({ title, type, description, url }: Props) => (
   <Head>
     <meta property="og:title" content={`${title} - LipersInSlums Wiki`} />
     <meta property="og:type" content={type} />
