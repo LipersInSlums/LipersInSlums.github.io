@@ -15,7 +15,6 @@ const App: React.FC<AppProps> = (props) => {
   return (
     <React.Fragment>
       <Head>
-        <title>LipersInSlums Wiki</title>
         <link href="/favicon.ico" rel="icon" />
         <meta
           content="minimum-scale=1, initial-scale=1, width=device-width"

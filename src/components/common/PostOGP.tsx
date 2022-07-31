@@ -4,10 +4,10 @@ import * as React from "react";
 type OGPPageType = "article" | "blog";
 
 type Props = {
-  title: string;
-  type: OGPPageType;
-  description: string;
-  url: string;
+  readonly title: string;
+  readonly type: OGPPageType;
+  readonly description: string;
+  readonly url: string;
 };
 
 export const PostOGP: React.FC<Props> = ({ title, type, description, url }) => (

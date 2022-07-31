@@ -10,7 +10,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 
 type Props = {
-  post: Post;
+  readonly post: Post;
 };
 
 const Post: NextPage<Props> = ({ post }) => {
@@ -18,6 +18,7 @@ const Post: NextPage<Props> = ({ post }) => {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
+  const htmlTitle = `${post.title} | LipersInSlums Wiki`;
   return (
     <div>
       <div />
@@ -33,7 +34,7 @@ const Post: NextPage<Props> = ({ post }) => {
               url="http://localhost:3000"
             />
             <Head>
-              <title>{post.title} | LipersInSlums Wiki</title>
+              <title>{htmlTitle}</title>
             </Head>
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </article>
@@ -46,7 +47,7 @@ const Post: NextPage<Props> = ({ post }) => {
 export default Post;
 
 type Params = ParsedUrlQuery & {
-  slug: string;
+  readonly slug: string;
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async ({

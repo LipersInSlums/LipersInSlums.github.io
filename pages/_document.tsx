@@ -8,11 +8,11 @@ import Document, {
 } from "next/document";
 import React from "react";
 
-type WithNonceProp = {
-  nonce: string;
+type WithNonceProps = {
+  readonly nonce: string;
 };
 
-export default class MyDocument extends Document<WithNonceProp> {
+export default class MyDocument extends Document<WithNonceProps> {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
     const nonce = randomBytes(128).toString("base64");
