@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Copyright from "../src/components/templates/materials";
+import Copyright from "@/components/templates/materials";
 import { Tabs, Tab } from "@mui/material";
 
 function TabPanel(props: {
