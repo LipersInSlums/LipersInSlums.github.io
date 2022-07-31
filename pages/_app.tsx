@@ -3,7 +3,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import theme from "../styles/theme";
+import theme from "@/styles/theme";
 import { useEffect } from "react";
 
 const App = (props: AppProps) => {
