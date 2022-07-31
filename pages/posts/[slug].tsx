@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
-import { getAllPosts, getPostBySlug } from "../../lib/api";
+import { getAllPosts, getPostBySlug } from "@/lib/api";
 import Head from "next/head";
 import markdownToHtml from "zenn-markdown-html";
 
-import { Post } from "../../src/model/Post";
-import PostOGP from "../../src/components/common/PostOGP";
+import { Post } from "@/model/Post";
+import PostOGP from "@/components/common/PostOGP";
 import { FC } from "react";
 
 interface Props {
