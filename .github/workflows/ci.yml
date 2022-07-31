@@ -6,58 +6,31 @@ jobs:
       fail-fast: false
       matrix:
         os:
-        - ubuntu-latest
+          - ubuntu-latest
         plan:
-        - node-version: '16.13.2'
+          - node-version: "16.16.0"
     runs-on: ${{ matrix.os }}
-    env:
-      FLAGS: ${{ matrix.flags }}
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-        fetch-depth: 0
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.plan.node-version }}
-        cache: 'yarn'
-        cache-dependency-path: ./yarn.lock
-    - name: Install dependencies
-      run: yarn
-    - name: Lint & Type check
-      run: yarn lint && yarn type-check
-    - name: Build
-      run: yarn build && yarn export
-    - name: add nojekyll
-      run: touch ./out/.nojekyll
-    - name: Archive artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ github.sha }}-out
-        path: out
-
-  deploy:
-    runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/master' }}
-    needs: build
-    steps:
-    - name: Generate token
-      id: generate_token
-      uses: tibdex/github-app-token@v1
-      with:
-        app_id: ${{ secrets.APP_ID }}
-        private_key: ${{ secrets.PRIVATE_KEY }}
-    - name: Download a public
-      uses: actions/download-artifact@v2
-      with:
-        name: ${{ github.sha }}-out
-        path: out
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ steps.generate_token.outputs.token }}
-        publish_dir: ./out
-
-
-
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.plan.node-version }}
+          cache: "yarn"
+          cache-dependency-path: ./yarn.lock
+      - name: Install dependencies
+        run: yarn
+      - name: Lint & Type check
+        run: yarn lint && yarn type-check
+      - name: Build
+        run: yarn build && yarn export
+      - name: add nojekyll
+        run: touch ./out/.nojekyll
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.sha }}-out
+          path: out
