@@ -27,7 +27,7 @@
       "@/model/*": ["src/model/*"],
       "@/lib/*": ["lib/*"],
       "@/styles/*": ["styles/*"],
-      "@/@pages/*": ["pages/*"]
+      "@/pages/*": ["pages/*"]
     }
   },
   "exclude": ["node_modules"],
