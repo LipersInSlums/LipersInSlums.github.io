@@ -45,8 +45,8 @@
     {
       "files": ["*.js"],
       "rules": {
-        "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/explicit-function-return-type": "error",
         "@typescript-eslint/ban-types": [
           "error",
           {
