@@ -1,16 +1,18 @@
-import { SyntheticEvent, useState } from "react";
+import * as React from "react";
 import Container from "@mui/material/Container";
-import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Copyright from "@/components/templates/materials";
+import { Copyright } from "@/components/templates/materials";
 import { Tabs, Tab } from "@mui/material";
+import { NextPage } from "next";
 
-function TabPanel(props: {
+type TabPanelProps = {
   readonly children: React.ReactNode;
   readonly value: number;
   readonly index: number;
-}) {
+};
+
+const TabPanel: React.FC<TabPanelProps> = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -28,26 +30,20 @@ function TabPanel(props: {
       )}
     </div>
   );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index: number) {
+const a11yProps = (index: number) => {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
   };
-}
+};
 
-export default function Index() {
-  const [value, setValue] = useState(0);
+const Index: NextPage = () => {
+  const [value, setValue] = React.useState<number>(0);
 
   const handleChange = (
-    _: SyntheticEvent<Element, Event>,
+    _: React.SyntheticEvent<Element, Event>,
     newValue: React.SetStateAction<number>
   ) => {
     setValue(newValue);
@@ -83,4 +79,6 @@ export default function Index() {
       </Box>
     </Container>
   );
-}
+};
+
+export default Index;

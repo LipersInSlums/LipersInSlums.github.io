@@ -6,7 +6,7 @@ import Head from "next/head";
 import theme from "@/styles/theme";
 import { useEffect } from "react";
 
-const App = (props: AppProps) => {
+const App: React.FC<AppProps> = (props) => {
   const { Component, pageProps } = props;
   useEffect(() => {
     import("zenn-embed-elements");

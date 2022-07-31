@@ -11,6 +11,7 @@ import React from "react";
 type WithNonceProp = {
   nonce: string;
 };
+
 export default class MyDocument extends Document<WithNonceProp> {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);

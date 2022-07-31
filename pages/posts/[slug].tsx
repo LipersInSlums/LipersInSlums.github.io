@@ -3,18 +3,17 @@ import ErrorPage from "next/error";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
 import Head from "next/head";
 import markdownToHtml from "zenn-markdown-html";
-
 import { Post } from "@/model/Post";
-import PostOGP from "@/components/common/PostOGP";
-import { FC } from "react";
+import { PostOGP } from "@/components/common/PostOGP";
+import * as React from "react";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { ParsedUrlQuery } from "querystring";
 
-interface Props {
+type Props = {
   post: Post;
-  morePosts: Post[];
-  preview?: boolean;
-}
+};
 
-const Post: FC<Props> = ({ post }) => {
+const Post: NextPage<Props> = ({ post }) => {
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -46,21 +45,24 @@ const Post: FC<Props> = ({ post }) => {
 
 export default Post;
 
-interface Params {
-  params: {
-    slug: string;
-  };
-}
+type Params = ParsedUrlQuery & {
+  slug: string;
+};
 
-export async function getStaticProps({ params }: Params) {
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params,
+}) => {
+  if (!params) {
+    throw Error("getStaticPaths failed!");
+  }
   const post = getPostBySlug(params.slug, [
     "title",
     "date",
     "slug",
     "author",
     "content",
-  ]);
-  const content = await markdownToHtml(post.content || "");
+  ]) as unknown as Post;
+  const content = await markdownToHtml(post.content);
 
   return {
     props: {
@@ -70,9 +72,9 @@ export async function getStaticProps({ params }: Params) {
       },
     },
   };
-}
+};
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getAllPosts(["slug"]);
 
   return {
@@ -85,4 +87,4 @@ export async function getStaticPaths() {
     }),
     fallback: false,
   };
-}
+};
