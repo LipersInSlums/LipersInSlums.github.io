@@ -4,7 +4,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import theme from "../styles/theme";
-import initTwitterScriptInner from "zenn-embed-elements/lib/init-twitter-script-inner";
 import { useEffect } from "react";
 
 const App = (props: AppProps) => {
@@ -25,11 +24,6 @@ const App = (props: AppProps) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: initTwitterScriptInner,
-          }}
-        />
         <Component {...pageProps} />
       </ThemeProvider>
     </React.Fragment>
