@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { FC } from "react";
 
 type OGPPageType = "article" | "blog";
 
@@ -9,7 +10,7 @@ type Props = {
   url: string;
 };
 
-const PostOGP = ({ title, type, description, url }: Props) => (
+const PostOGP: FC<Props> = ({ title, type, description, url }) => (
   <Head>
     <meta property="og:title" content={`${title} - LipersInSlums Wiki`} />
     <meta property="og:type" content={type} />

@@ -6,6 +6,7 @@ import markdownToHtml from "zenn-markdown-html";
 
 import { Post } from "../../src/model/Post";
 import PostOGP from "../../src/components/common/PostOGP";
+import { FC } from "react";
 
 interface Props {
   post: Post;
@@ -13,7 +14,7 @@ interface Props {
   preview?: boolean;
 }
 
-const Post = ({ post }: Props) => {
+const Post: FC<Props> = ({ post }) => {
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
