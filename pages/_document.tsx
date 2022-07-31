@@ -6,7 +6,6 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
-import React from "react";
 
 type WithNonceProps = {
   readonly nonce: string;

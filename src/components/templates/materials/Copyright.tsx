@@ -1,8 +1,8 @@
-import * as React from "react";
+import type { FC } from "react";
 import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
 
-export const Copyright: React.FC = () => {
+export const Copyright: FC = () => {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}

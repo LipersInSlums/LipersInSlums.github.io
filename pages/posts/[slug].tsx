@@ -5,7 +5,6 @@ import Head from "next/head";
 import markdownToHtml from "zenn-markdown-html";
 import { Post } from "@/model/Post";
 import { PostOGP } from "@/components/common/PostOGP";
-import * as React from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 

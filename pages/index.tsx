@@ -1,4 +1,5 @@
-import * as React from "react";
+import { Fragment, useState } from "react";
+import type { FC, ReactNode, SetStateAction, SyntheticEvent } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -8,12 +9,12 @@ import { NextPage } from "next";
 import Head from "next/head";
 
 type TabPanelProps = {
-  readonly children: React.ReactNode;
+  readonly children: ReactNode;
   readonly value: number;
   readonly index: number;
 };
 
-const TabPanel: React.FC<TabPanelProps> = (props) => {
+const TabPanel: FC<TabPanelProps> = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -46,18 +47,18 @@ const a11yProps: A11yProps = (index) => {
 };
 
 const Index: NextPage = () => {
-  const [value, setValue] = React.useState<number>(0);
+  const [value, setValue] = useState<number>(0);
 
   const handleChange = (
-    _: React.SyntheticEvent<Element, Event>,
-    newValue: React.SetStateAction<number>
+    _: SyntheticEvent<Element, Event>,
+    newValue: SetStateAction<number>
   ) => {
     setValue(newValue);
   };
   const title = "Home - LipersInSlums Wiki";
 
   return (
-    <>
+    <Fragment>
       <Head>
         <title>{title}</title>
       </Head>
@@ -89,7 +90,7 @@ const Index: NextPage = () => {
           <Copyright />
         </Box>
       </Container>
-    </>
+    </Fragment>
   );
 };
 
