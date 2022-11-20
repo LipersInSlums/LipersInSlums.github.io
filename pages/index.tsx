@@ -1,5 +1,5 @@
 import IndexPage from "src/pages/Index";
-import { fetchAllPosts } from "./api/posts";
+import { getAllPosts } from "./api/posts";
 
 type Props = Awaited<ReturnType<typeof getStaticProps>>["props"];
 
@@ -10,7 +10,7 @@ const Index = ({ posts }: Props) => {
 export default Index;
 
 export const getStaticProps = async () => {
-  const posts = await fetchAllPosts();
+  const posts = await getAllPosts();
   return {
     props: { posts },
   };

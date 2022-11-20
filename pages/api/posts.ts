@@ -2,12 +2,11 @@ import { join, parse } from "path";
 import { NextApiHandler } from "next";
 import fs from "node:fs/promises";
 import matter from "gray-matter";
-import fetchApi from "@/lib/apiClient";
 import parseMatter from "src/util/parseMatter";
 
 const postsDirectory = join(process.cwd(), "_posts");
 
-async function getAllPosts() {
+export async function getAllPosts() {
   const fileNames = await fs.readdir(postsDirectory);
 
   const files = await Promise.all(
@@ -23,9 +22,6 @@ async function getAllPosts() {
 
 export type Post = Awaited<ReturnType<typeof getAllPosts>>[0];
 export type PostsResult = Awaited<Post[]>;
-export async function fetchAllPosts(): Promise<PostsResult> {
-  return await fetchApi("posts");
-}
 
 const handler: NextApiHandler = async (_req, res) => {
   const contents = await getAllPosts();
