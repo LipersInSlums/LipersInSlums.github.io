@@ -15,7 +15,7 @@ export default function Index({ posts }: Props) {
             key={post.path}
             author={post.author.name}
             date={post.date}
-            excert={post.excerpt}
+            excerpt={post.excerpt}
             path={post.path}
             title={post.title}
           />

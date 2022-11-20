@@ -4,7 +4,7 @@ import { dateFormat } from "src/util/dateFormat";
 
 type Props = {
   title: string;
-  excert: string;
+  excerpt: string;
   author: string;
   date: string;
   path: string;
@@ -13,7 +13,7 @@ type Props = {
 export default function PostListItem({
   author,
   date,
-  excert,
+  excerpt,
   title,
   path,
 }: Props) {
@@ -25,7 +25,7 @@ export default function PostListItem({
           <Author>{author}</Author>
           <Date>{dateFormat(date)}</Date>
         </TitleWrap>
-        <ExcertWrap>{excert}</ExcertWrap>
+        <ExcerptWrap>{excerpt}</ExcerptWrap>
       </Link>
     </Wrap>
   );
@@ -67,6 +67,6 @@ const Date = styled.span`
   color: #666;
 `;
 
-const ExcertWrap = styled.div`
+const ExcerptWrap = styled.div`
   color: #ccc;
 `;
