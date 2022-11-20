@@ -5,6 +5,11 @@ import { ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import theme from "@/styles/theme";
+import Container from "@mui/material/Container";
+
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { Copyright } from "@/components/templates/materials";
 
 const App: FC<AppProps> = (props) => {
   const { Component, pageProps } = props;
@@ -23,7 +28,17 @@ const App: FC<AppProps> = (props) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <Container maxWidth="sm">
+          <Box sx={{ my: 4 }}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              LipersInSlums Wiki
+            </Typography>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Component {...pageProps} />
+              <Copyright />
+            </Box>
+          </Box>
+        </Container>
       </ThemeProvider>
     </Fragment>
   );
