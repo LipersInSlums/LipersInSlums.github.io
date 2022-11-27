@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { randomBytes } from "crypto";
 import Document, {
   Html,
@@ -51,11 +52,29 @@ export default class MyDocument extends Document<WithNonceProps> {
             sizes="128x128"
           />
         </Head>
-        <body>
+        <Body>
           <Main />
           <NextScript nonce={nonce} />
-        </body>
+        </Body>
       </Html>
     );
   }
 }
+
+const Body = styled.body`
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+
+  background-color: #fffffc;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  #__next {
+    width: 100%;
+    height: 100%;
+  }
+`;
