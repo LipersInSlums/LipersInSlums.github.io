@@ -32,6 +32,24 @@ export default class MyDocument extends Document<WithNonceProps> {
           <meta httpEquiv="Content-Security-Policy" content={csp} />
           <meta property="og:site_name" content="LipersInSlums Wiki" />
           <meta name="twitter:card" content="summary" />
+          <link
+            rel="icon"
+            type="image/png"
+            href="/favicons/favicon-32x32.png"
+            sizes="32x32"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            href="/favicons/favicon-64x64.png"
+            sizes="64x64"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            href="/favicons/favicon-128x128.png"
+            sizes="128x128"
+          />
         </Head>
         <body>
           <Main />
