@@ -1,5 +1,6 @@
 import { Post } from "@/pages/api/posts";
 import styled from "@emotion/styled";
+import usePageTitle from "src/hooks/usePageTitle";
 import PostListItem from "./PostListItem";
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
 };
 
 export default function Index({ posts }: Props) {
+  usePageTitle();
   return (
     <Wrap>
       <ListWrap>

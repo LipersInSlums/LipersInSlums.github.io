@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
-import Head from "next/head";
 import markdownToHtml from "zenn-markdown-html";
 import { Post } from "@/model/Post";
 import { PostOGP } from "@/components/common/PostOGP";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
+import usePageTitle from "src/hooks/usePageTitle";
 
 type Props = {
   readonly post: Post;
@@ -14,10 +14,10 @@ type Props = {
 
 const Post: NextPage<Props> = ({ post }) => {
   const router = useRouter();
+  usePageTitle(post?.title);
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
-  const htmlTitle = `${post.title} | LipersInSlums Wiki`;
   return (
     <div>
       <div />
@@ -28,13 +28,10 @@ const Post: NextPage<Props> = ({ post }) => {
           <article className="mb-32 znc">
             <PostOGP
               title={post.title}
-              description="hpge"
+              description={post.excerpt}
               type="article"
-              url="http://localhost:3000"
+              url={`https://lipersinslums.github.io/posts/${post.slug}`}
             />
-            <Head>
-              <title>{htmlTitle}</title>
-            </Head>
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </article>
         </>

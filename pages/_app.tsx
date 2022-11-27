@@ -1,15 +1,15 @@
-import { useEffect, Fragment } from "react";
+import { useEffect } from "react";
 import type { FC } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
-import Head from "next/head";
 import theme from "@/styles/theme";
 import Container from "@mui/material/Container";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Copyright } from "@/components/templates/materials";
+import { PageTitleProvider } from "src/hooks/usePageTitle";
 
 const App: FC<AppProps> = (props) => {
   const { Component, pageProps } = props;
@@ -18,15 +18,8 @@ const App: FC<AppProps> = (props) => {
   }, []);
 
   return (
-    <Fragment>
-      <Head>
-        <link href="/favicon.ico" rel="icon" />
-        <meta
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-          name="viewport"
-        />
-      </Head>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <PageTitleProvider suffix="LipersInSlums Wiki" delimiter="|">
         <CssBaseline />
         <Container maxWidth="sm">
           <Box sx={{ my: 4 }}>
@@ -39,8 +32,8 @@ const App: FC<AppProps> = (props) => {
             </Box>
           </Box>
         </Container>
-      </ThemeProvider>
-    </Fragment>
+      </PageTitleProvider>
+    </ThemeProvider>
   );
 };
 
