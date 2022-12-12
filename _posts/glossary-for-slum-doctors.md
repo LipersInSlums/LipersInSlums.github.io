@@ -15,7 +15,7 @@ cf.：関連しているものや由来が同じものを上げるときに用�
 
 ## 編纂方針
 ドクター語、つまりアークナイツに関連した用語を中心に記述するが、ブルーアーカイブなどからのものも浸透の具合に応じて収録する。  
-また、アークナイツの基本用語に関しては[白wiki](https://arknights.wikiru.jp/index.php?%CD%D1%B8%EC%BD%B8)や[黒wiki](https://wiki3.jp/arknightsjp)に委ねることにする。  
+また、アークナイツの基本用語に関しては[白wiki](https://arknights.wikiru.jp/index.php?%CD%D1%B8%EC%BD%B8)や[黒wiki](https://wiki3.jp/arknightsjp/page/676)に委ねることにする。  
 
 ## あ行
 ### アーツ欠落野郎Aチーム
