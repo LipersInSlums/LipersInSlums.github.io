@@ -1,10 +1,7 @@
-import getConfig from "next/config";
+import nextConfig from "src/config/nextConfig";
 
 export function url(path: string) {
-  console.log(getConfig());
-  const { publicRuntimeConfig } = getConfig() as {
-    publicRuntimeConfig: { urlPrefix: string };
-  };
+  const { publicRuntimeConfig } = nextConfig();
 
   return publicRuntimeConfig.urlPrefix + path;
 }
