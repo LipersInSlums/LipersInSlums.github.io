@@ -12,13 +12,16 @@ export async function getAllPosts() {
   const files = await Promise.all(
     fileNames.map((name) => fs.readFile(join(postsDirectory, name), "utf-8"))
   );
-  const metaData = files.map((content) => matter(content));
+  const metaData = files.map((file) => matter(file));
 
-  return metaData.map((data, index) => ({
-    path: parse(fileNames[index]).name,
-    ...parseMatter(data),
-  }));
-}
+  return metaData
+    .map((data, index) => ({
+      path: parse(fileNames[index]).name,
+      ...parseMatter(data),
+    }))
+    // sort posts by date in descending order
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+};
 
 export type Post = Awaited<ReturnType<typeof getAllPosts>>[0];
 export type PostsResult = Awaited<Post[]>;

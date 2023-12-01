@@ -9,36 +9,36 @@ export const getPostSlugs: GetPostSlugs = () => {
   return fs.readdirSync(postsDirectory);
 };
 
-type Items = {
+type Post = {
   [key: string]: string;
 };
-type GetPostBySlug = (slug: string, fields: string[]) => Items;
+type GetPostBySlug = (slug: string, fields: string[]) => Post;
 export const getPostBySlug: GetPostBySlug = (slug, fields = []) => {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  const items: Items = {};
+  const post: Post = {};
 
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
     if (field === "slug") {
-      items[field] = realSlug;
+      post[field] = realSlug;
     }
     if (field === "content") {
-      items[field] = content;
+      post[field] = content;
     }
 
     if (typeof data[field] !== "undefined") {
-      items[field] = data[field];
+      post[field] = data[field];
     }
   });
 
-  return items;
+  return post;
 };
 
-type GetAllPosts = (field: string[]) => Items[];
+type GetAllPosts = (field: string[]) => Post[];
 export const getAllPosts: GetAllPosts = (fields = []) => {
   const slugs = getPostSlugs();
   const posts = slugs

@@ -18,8 +18,8 @@ export default function Index({ posts }: Props) {
             author={post.author.name}
             date={post.date}
             excerpt={post.excerpt}
-            path={post.path}
             title={post.title}
+            path={post.path}
           />
         ))}
       </ListWrap>
