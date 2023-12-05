@@ -7,6 +7,7 @@ import { PostOGP } from "@/components/common/PostOGP";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import usePageTitle from "src/hooks/usePageTitle";
+import styled from "@emotion/styled";
 
 type Props = {
   readonly post: Post;
@@ -25,7 +26,7 @@ const Post: NextPage<Props> = ({ post }) => {
         <div>Loading…</div>
       ) : (
         <>
-          <article className="mb-32 znc">
+          <WikiArticle className="mb-32 znc">
             <PostOGP
               title={post.title}
               description={post.excerpt}
@@ -33,7 +34,7 @@ const Post: NextPage<Props> = ({ post }) => {
               url={`https://lipersinslums.github.io/posts/${post.slug}`}
             />
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
-          </article>
+          </WikiArticle>
         </>
       )}
     </div>
@@ -86,3 +87,42 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: false,
   };
 };
+
+const WikiArticle = styled.article`
+  h1 {
+    position: relative;
+    font-size: 180%;
+    color: #323220;
+    padding-bottom: 0.2em;
+  }
+
+  h1:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 6px;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent 0 4px,
+      #8a8a86 4px 8px
+    );
+  }
+
+  h2 {
+    font-size: 150%;
+    color: #323220;
+    border-bottom: 2px dashed #8a8a86;
+  }
+
+  h3 {
+    font-size: 120%;
+    border-left: 5px solid #8a8a86;
+    padding-left: 0.5em;
+  }
+
+  p {
+    color: #2d2d0f;
+  }
+`;
