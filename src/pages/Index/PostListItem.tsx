@@ -68,5 +68,5 @@ const Date = styled.span`
 `;
 
 const ExcerptWrap = styled.div`
-  color: #ccc;
+  color: #8a8a86;
 `;
