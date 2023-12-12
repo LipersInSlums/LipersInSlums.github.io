@@ -10,6 +10,7 @@ import { PostOGP } from "@/components/common/PostOGP";
 
 import usePageTitle from "src/hooks/usePageTitle";
 import { Post } from "@/model/Post";
+import HeadingList from "@/components/common/HeadingList";
 
 type Props = {
   readonly post: Post;
@@ -21,13 +22,26 @@ const PostPage: NextPage<Props> = ({ post }) => {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
+
   return (
     <div>
       <div />
       {router.isFallback ? (
         <div>Loading…</div>
       ) : (
-        <>
+        // 目次が非表示のときは display を block にしないと変に右寄りになる
+        <Container style={{ display: post.show_index ? "grid" : "block" }}>
+          {post.show_index && (
+            <HeadingContainer className="heading-container">
+              <HeadingList
+                title="目次"
+                items={post.headings.map((head) => ({
+                  level: head.level,
+                  content: head.content,
+                }))}
+              />
+            </HeadingContainer>
+          )}
           <WikiArticle className="mb-32 znc">
             <PostOGP
               title={post.title}
@@ -35,9 +49,10 @@ const PostPage: NextPage<Props> = ({ post }) => {
               type="article"
               url={`https://lipersinslums.github.io/posts/${post.slug}`}
             />
+
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </WikiArticle>
-        </>
+        </Container>
       )}
     </div>
   );
@@ -83,6 +98,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: false,
   };
 };
+
+const Container = styled.main`
+  display: grid;
+  grid-template-columns: 0.85fr 3fr;
+  column-gap: 10px;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const HeadingContainer = styled.div`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
 
 const WikiArticle = styled.article`
   h1 {
