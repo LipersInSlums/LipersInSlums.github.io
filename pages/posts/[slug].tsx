@@ -1,19 +1,19 @@
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
-import { getAllPosts, getPostBySlug } from "@/lib/api";
 import markdownToHtml from "zenn-markdown-html";
-import { Post } from "@/model/Post";
-import { PostOGP } from "@/components/common/PostOGP";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import styled from "@emotion/styled";
+import { Post, getAllPosts, getPostBySlug } from "@/lib/api";
+
+import { PostOGP } from "@/components/common/PostOGP";
 import { ParsedUrlQuery } from "querystring";
 import usePageTitle from "src/hooks/usePageTitle";
-import styled from "@emotion/styled";
 
 type Props = {
-  readonly post: Post;
+  readonly post: Post<["content", "title", "slug", "excerpt"]>;
 };
 
-const Post: NextPage<Props> = ({ post }) => {
+const PostPage: NextPage<Props> = ({ post }) => {
   const router = useRouter();
   usePageTitle(post?.title);
   if (!router.isFallback && !post?.slug) {
@@ -41,7 +41,7 @@ const Post: NextPage<Props> = ({ post }) => {
   );
 };
 
-export default Post;
+export default PostPage;
 
 type Params = ParsedUrlQuery & {
   readonly slug: string;
@@ -60,7 +60,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
     "slug",
     "author",
     "content",
-  ]) as unknown as Post;
+    "show_index",
+  ]);
   const content = await markdownToHtml(post.content);
 
   return {

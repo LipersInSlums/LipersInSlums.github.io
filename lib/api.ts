@@ -1,49 +1,53 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
+import { RawPost } from "@/model/Post";
+import { ArrayToEnum, ExcludesUndefined } from "src/util/types";
 
 const postsDirectory = join(process.cwd(), "_posts");
 
-type GetPostSlugs = () => string[];
-export const getPostSlugs: GetPostSlugs = () => {
+export function getPostSlugs(): string[] {
   return fs.readdirSync(postsDirectory);
-};
+}
 
-type Post = {
-  [key: string]: string;
-};
-type GetPostBySlug = (slug: string, fields: string[]) => Post;
-export const getPostBySlug: GetPostBySlug = (slug, fields = []) => {
+function parsePost(slug: string): RawPost {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
+  const { content, data } = matter(fileContents);
+  return { ...data, slug: realSlug, content };
+}
 
-  const post: Post = {};
+export function getPostBySlug<const Fields extends Array<keyof RawPost>>(
+  slug: string,
+  fields: Fields,
+): Pick<ExcludesUndefined<RawPost>, ArrayToEnum<Fields>> {
+  const post = parsePost(slug);
 
-  // Ensure only the minimal needed data is exposed
-  fields.forEach((field) => {
-    if (field === "slug") {
-      post[field] = realSlug;
-    }
-    if (field === "content") {
-      post[field] = content;
-    }
+  const pickedPost = fields
+    .filter((field) => post[field] != null && typeof post[field] === "string")
+    .reduce<Record<string, string>>(
+      (acc, curr) => ({ ...acc, [curr as string]: post[curr] as string }),
+      {},
+    );
 
-    if (typeof data[field] !== "undefined") {
-      post[field] = data[field];
-    }
-  });
+  return pickedPost as Pick<
+    ExcludesUndefined<RawPost>,
+    ArrayToEnum<typeof fields>
+  >;
+}
 
-  return post;
-};
+export type Post<Fields extends Array<keyof RawPost>> = ReturnType<
+  typeof getPostBySlug<Fields>
+>;
 
-type GetAllPosts = (field: string[]) => Post[];
-export const getAllPosts: GetAllPosts = (fields = []) => {
+export function getAllPosts(
+  fields: Array<keyof RawPost> = [],
+): Post<typeof fields>[] {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
-};
+}
