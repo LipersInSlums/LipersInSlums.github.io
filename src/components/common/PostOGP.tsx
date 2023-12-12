@@ -10,7 +10,7 @@ type Props = {
   readonly url: string;
 };
 
-export const PostOGP: FC<Props> = ({ title, type, description, url }) => (
+export const PostOGP: FC<Props> = ({ description, title, type, url }) => (
   <Head>
     <meta property="og:title" content={`${title} - LipersInSlums Wiki`} />
     <meta property="og:type" content={type} />

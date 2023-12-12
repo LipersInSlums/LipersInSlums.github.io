@@ -3,14 +3,13 @@ import type { FC } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
-import theme from "@/styles/theme";
 import Container from "@mui/material/Container";
+import styled from "@emotion/styled";
+import Link from "next/link";
+import theme from "@/styles/theme";
 import { Copyright } from "@/components/templates/materials";
 import { PageTitleProvider } from "src/hooks/usePageTitle";
 import LisperInSlumsLogo from "@/components/atoms/LisperInSlumsLogo.svg";
-
-import styled from "@emotion/styled";
-import Link from "next/link";
 
 const App: FC<AppProps> = (props) => {
   const { Component, pageProps } = props;

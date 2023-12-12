@@ -26,7 +26,8 @@
     "react",
     "@typescript-eslint",
     "jsx-a11y",
-    "import"
+    "import",
+    "sort-destructure-keys"
   ],
   "extends": [
     "next/core-web-vitals",
@@ -39,7 +40,9 @@
   ],
   "rules": {
     "react/prop-types": "off",
-    "@next/next/no-img-element": "off" // SSGなのでnext/imageに対応できないため
+    "@next/next/no-img-element": "off", // SSGなのでnext/imageに対応できないため
+    "import/order": ["warn"],
+    "sort-destructure-keys/sort-destructure-keys": ["warn"]
   },
   "overrides": [
     {

@@ -11,7 +11,7 @@ export type GrayMetaData = {
 };
 
 export default function parseMatter(
-  matter: GrayMatterFile<string>
+  matter: GrayMatterFile<string>,
 ): GrayMetaData {
   return {
     title: matter.data["title"],

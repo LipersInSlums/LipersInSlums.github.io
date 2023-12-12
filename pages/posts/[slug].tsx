@@ -1,3 +1,4 @@
+import { ParsedUrlQuery } from "querystring";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import markdownToHtml from "zenn-markdown-html";
@@ -6,7 +7,7 @@ import styled from "@emotion/styled";
 import { Post, getAllPosts, getPostBySlug } from "@/lib/api";
 
 import { PostOGP } from "@/components/common/PostOGP";
-import { ParsedUrlQuery } from "querystring";
+
 import usePageTitle from "src/hooks/usePageTitle";
 
 type Props = {
