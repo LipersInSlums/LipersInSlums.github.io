@@ -33,7 +33,7 @@ type Props = PropsWithChildren<{
   delimiter: string;
 }>;
 
-export function PageTitleProvider({ suffix, delimiter, children }: Props) {
+export function PageTitleProvider({ children, delimiter, suffix }: Props) {
   const [title, setTitle] = useState(suffix);
 
   const changeTitle = useCallback(
@@ -44,7 +44,7 @@ export function PageTitleProvider({ suffix, delimiter, children }: Props) {
         setTitle(`${title} ${delimiter} ${suffix}`);
       }
     },
-    [suffix, delimiter]
+    [suffix, delimiter],
   );
 
   return (

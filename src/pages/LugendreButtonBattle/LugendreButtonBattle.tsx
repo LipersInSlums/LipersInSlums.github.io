@@ -1,5 +1,5 @@
-import LugendreButton from "@/components/atoms/LugendreButton";
 import styled from "@emotion/styled";
+import LugendreButton from "@/components/atoms/LugendreButton";
 
 export default function LugendreButtonBattle() {
   return (

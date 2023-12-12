@@ -1,5 +1,5 @@
-import Link from "@/components/atoms/Link";
 import styled from "@emotion/styled";
+import Link from "@/components/atoms/Link";
 import { dateFormat } from "src/util/dateFormat";
 
 type Props = {
@@ -14,8 +14,8 @@ export default function PostListItem({
   author,
   date,
   excerpt,
-  title,
   path,
+  title,
 }: Props) {
   return (
     <Wrap>
