@@ -4,14 +4,15 @@ import ErrorPage from "next/error";
 import markdownToHtml from "zenn-markdown-html";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styled from "@emotion/styled";
-import { Post, getAllPosts, getPostBySlug } from "@/lib/api";
+import { getAllPosts, getPostBySlug } from "@/lib/api";
 
 import { PostOGP } from "@/components/common/PostOGP";
 
 import usePageTitle from "src/hooks/usePageTitle";
+import { Post } from "@/model/Post";
 
 type Props = {
-  readonly post: Post<["content", "title", "slug", "excerpt"]>;
+  readonly post: Post;
 };
 
 const PostPage: NextPage<Props> = ({ post }) => {
@@ -54,15 +55,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   if (!params) {
     throw Error("getStaticPaths failed!");
   }
-  const post = getPostBySlug(params.slug, [
-    "title",
-    "date",
-    "excerpt",
-    "slug",
-    "author",
-    "content",
-    "show_index",
-  ]);
+  const post = getPostBySlug(params.slug);
+
   const content = await markdownToHtml(post.content);
 
   return {
@@ -76,7 +70,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = getAllPosts(["slug"]);
+  const posts = getAllPosts();
 
   return {
     paths: posts.map((post) => {

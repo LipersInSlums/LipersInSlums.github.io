@@ -1,8 +1,8 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
-import { RawPost } from "@/model/Post";
-import { ArrayToEnum, ExcludesUndefined } from "src/util/types";
+import { RawPost, Post, parsePostSchema } from "@/model/Post";
+import parseHeadings from "@/lib/parseHeadings";
 
 const postsDirectory = join(process.cwd(), "_posts");
 
@@ -15,38 +15,27 @@ function parsePost(slug: string): RawPost {
   const fullPath = join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content, data } = matter(fileContents);
-  return { ...data, slug: realSlug, content };
+
+  const headings = parseHeadings(content);
+
+  return {
+    content,
+    headings,
+    slug: realSlug,
+    parsed: parsePostSchema.parse(data),
+  };
 }
 
-export function getPostBySlug<const Fields extends Array<keyof RawPost>>(
-  slug: string,
-  fields: Fields,
-): Pick<ExcludesUndefined<RawPost>, ArrayToEnum<Fields>> {
-  const post = parsePost(slug);
+export function getPostBySlug(slug: string): Post {
+  const { parsed, ...data } = parsePost(slug);
 
-  const pickedPost = fields
-    .filter((field) => post[field] != null && typeof post[field] === "string")
-    .reduce<Record<string, string>>(
-      (acc, curr) => ({ ...acc, [curr as string]: post[curr] as string }),
-      {},
-    );
-
-  return pickedPost as Pick<
-    ExcludesUndefined<RawPost>,
-    ArrayToEnum<typeof fields>
-  >;
+  return { ...parsed, ...data };
 }
 
-export type Post<Fields extends Array<keyof RawPost>> = ReturnType<
-  typeof getPostBySlug<Fields>
->;
-
-export function getAllPosts(
-  fields: Array<keyof RawPost> = [],
-): Post<typeof fields>[] {
+export function getAllPosts(): Post[] {
   const slugs = getPostSlugs();
   const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
+    .map((slug) => getPostBySlug(slug))
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
