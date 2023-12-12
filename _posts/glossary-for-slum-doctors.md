@@ -4,6 +4,7 @@ excerpt: 'アークナイツ用語集'
 date: '2022-11-22T12:28:07Z'
 author:
   name: meloviliju
+show_index: true
 ---
 
 # ドクター語スラム方言

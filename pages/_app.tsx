@@ -32,7 +32,7 @@ const App: FC<AppProps> = (props) => {
               </Link>
             </LogoWrap>
           </HeaderWrap>
-          <AppWrap maxWidth="sm">
+          <AppWrap maxWidth="xl">
             <Component {...pageProps} />
           </AppWrap>
           <FooterWrap>

@@ -1,49 +1,42 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
+import { RawPost, Post, parsePostSchema } from "@/model/Post";
+import parseHeadings from "@/lib/parseHeadings";
 
 const postsDirectory = join(process.cwd(), "_posts");
 
-type GetPostSlugs = () => string[];
-export const getPostSlugs: GetPostSlugs = () => {
+export function getPostSlugs(): string[] {
   return fs.readdirSync(postsDirectory);
-};
+}
 
-type Post = {
-  [key: string]: string;
-};
-type GetPostBySlug = (slug: string, fields: string[]) => Post;
-export const getPostBySlug: GetPostBySlug = (slug, fields = []) => {
+function parsePost(slug: string): RawPost {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content, data } = matter(fileContents);
 
-  const post: Post = {};
+  const headings = parseHeadings(content);
 
-  // Ensure only the minimal needed data is exposed
-  fields.forEach((field) => {
-    if (field === "slug") {
-      post[field] = realSlug;
-    }
-    if (field === "content") {
-      post[field] = content;
-    }
+  return {
+    content,
+    headings,
+    slug: realSlug,
+    parsed: parsePostSchema.parse(data),
+  };
+}
 
-    if (typeof data[field] !== "undefined") {
-      post[field] = data[field];
-    }
-  });
+export function getPostBySlug(slug: string): Post {
+  const { parsed, ...data } = parsePost(slug);
 
-  return post;
-};
+  return { ...parsed, ...data };
+}
 
-type GetAllPosts = (field: string[]) => Post[];
-export const getAllPosts: GetAllPosts = (fields = []) => {
+export function getAllPosts(): Post[] {
   const slugs = getPostSlugs();
   const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
+    .map((slug) => getPostBySlug(slug))
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
-};
+}
