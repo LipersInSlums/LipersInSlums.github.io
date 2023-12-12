@@ -4245,3 +4245,8 @@ zenn-markdown-html@^0.1.115:
     markdown-it-task-lists "^2.1.1"
     prismjs "^1.29.0"
     sanitize-html "^2.9.0"
+
+zod@^3.22.4:
+  version "3.22.4"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.4.tgz#f31c3a9386f61b1f228af56faa9255e845cf3fff"
+  integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==
