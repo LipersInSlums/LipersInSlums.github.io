@@ -29,8 +29,7 @@ const PostPage: NextPage<Props> = ({ post }) => {
       {router.isFallback ? (
         <div>Loading…</div>
       ) : (
-        // 目次が非表示のときは display を block にしないと変に右寄りになる
-        <Container style={{ display: post.show_index ? "grid" : "block" }}>
+        <Container>
           {post.show_index && (
             <HeadingContainer className="heading-container">
               <HeadingList
@@ -106,6 +105,8 @@ const Container = styled.main`
 
   @media screen and (max-width: 768px) {
     display: block;
+    grid-template-columns: none;
+    column-gap: inherit;
   }
 `;
 
