@@ -4,6 +4,7 @@ import ErrorPage from "next/error";
 import markdownToHtml from "zenn-markdown-html";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styled from "@emotion/styled";
+import { useState } from "react";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
 
 import { PostOGP } from "@/components/common/PostOGP";
@@ -11,6 +12,7 @@ import { PostOGP } from "@/components/common/PostOGP";
 import usePageTitle from "src/hooks/usePageTitle";
 import { Post } from "@/model/Post";
 import HeadingList from "@/components/common/HeadingList";
+import useScrollPositionAnchor from "src/hooks/useScrollPositionAnchor";
 
 type Props = {
   readonly post: Post;
@@ -18,6 +20,14 @@ type Props = {
 
 const PostPage: NextPage<Props> = ({ post }) => {
   const router = useRouter();
+
+  const [lastOnScreen, setLastOnScreen] = useState<HTMLElement | null>(null);
+
+  const { targetRef } = useScrollPositionAnchor<HTMLDivElement>(
+    "h1,h2,h3",
+    (ent) => setLastOnScreen(ent.target as HTMLElement),
+  );
+
   usePageTitle(post?.title);
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -25,20 +35,24 @@ const PostPage: NextPage<Props> = ({ post }) => {
 
   return (
     <div>
-      <div />
       {router.isFallback ? (
         <div>Loading…</div>
       ) : (
         <Container>
           {post.show_index && (
             <HeadingContainer className="heading-container">
-              <HeadingList
-                title="目次"
-                items={post.headings.map((head) => ({
-                  level: head.level,
-                  content: head.content,
-                }))}
-              />
+              <HeadingHolder>
+                <HeadingList
+                  title="目次"
+                  items={post.headings.map((head) => ({
+                    level: head.level,
+                    content: head.content,
+                  }))}
+                  highlightIndexSelector={
+                    lastOnScreen?.textContent?.trim() ?? ""
+                  }
+                />
+              </HeadingHolder>
             </HeadingContainer>
           )}
           <WikiArticle className="mb-32 znc">
@@ -49,7 +63,10 @@ const PostPage: NextPage<Props> = ({ post }) => {
               url={`https://lipersinslums.github.io/posts/${post.slug}`}
             />
 
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            <div
+              ref={targetRef}
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            ></div>
           </WikiArticle>
         </Container>
       )}
@@ -114,6 +131,14 @@ const HeadingContainer = styled.div`
   @media screen and (max-width: 768px) {
     display: none;
   }
+`;
+
+const HeadingHolder = styled.div`
+  position: sticky;
+  top: 30px;
+
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
 `;
 
 const WikiArticle = styled.article`
