@@ -12,7 +12,7 @@ import { PostOGP } from "@/components/common/PostOGP";
 import usePageTitle from "src/hooks/usePageTitle";
 import { Post } from "@/model/Post";
 import HeadingList from "@/components/common/HeadingList";
-import useScrollPositionAnchor from "src/hooks/useScrollPositionAnchor";
+import useLastOnScreen from "src/hooks/useLastOnScreen";
 
 type Props = {
   readonly post: Post;
@@ -23,9 +23,8 @@ const PostPage: NextPage<Props> = ({ post }) => {
 
   const [lastOnScreen, setLastOnScreen] = useState<HTMLElement | null>(null);
 
-  const { targetRef } = useScrollPositionAnchor<HTMLDivElement>(
-    "h1,h2,h3",
-    (ent) => setLastOnScreen(ent.target as HTMLElement),
+  const { targetRef } = useLastOnScreen<HTMLDivElement>("h1,h2,h3", (ent) =>
+    setLastOnScreen(ent.target as HTMLElement),
   );
 
   usePageTitle(post?.title);

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 
-export default function useScrollPositionAnchor<
+export default function useLastOnScreen<
   ElementType extends HTMLElement = HTMLElement,
 >(
   elementSelector: string,
