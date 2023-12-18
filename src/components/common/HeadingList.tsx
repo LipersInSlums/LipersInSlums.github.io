@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type Props = {
   title: string;
@@ -8,24 +8,15 @@ type Props = {
     content: string;
     level: number;
   }[];
-  highlightIndexSelector: string;
+  highlightIndex: number;
 };
 
-export default function HeadingList({
-  highlightIndexSelector,
-  items,
-  title,
-}: Props) {
-  const highlightedIndex = useMemo(
-    () => items.findIndex((item) => item.content === highlightIndexSelector),
-    [items, highlightIndexSelector],
-  );
-
+export default function HeadingList({ highlightIndex, items, title }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const target = containerRef.current?.querySelector?.(
-      `#index_${highlightedIndex}`,
+      `#index_${highlightIndex}`,
     );
     if (target) {
       const top = (target as HTMLElement).offsetTop - 200;
@@ -33,7 +24,7 @@ export default function HeadingList({
         top: top > 0 ? top : 0,
       });
     }
-  }, [highlightedIndex, items]);
+  }, [highlightIndex, items]);
 
   return (
     <Container ref={containerRef}>
@@ -41,7 +32,7 @@ export default function HeadingList({
       {items.map((item, index) => {
         const Heading = headings[item.level - 1];
         const isHighlighted =
-          highlightedIndex > index ? "highlighted" : undefined;
+          highlightIndex > index ? "highlighted" : undefined;
         return (
           <Heading
             id={`index_${index}`}

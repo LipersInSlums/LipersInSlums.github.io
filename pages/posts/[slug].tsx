@@ -4,7 +4,7 @@ import ErrorPage from "next/error";
 import markdownToHtml from "zenn-markdown-html";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
 
 import { PostOGP } from "@/components/common/PostOGP";
@@ -27,6 +27,14 @@ const PostPage: NextPage<Props> = ({ post }) => {
     setLastOnScreen(ent.target as HTMLElement),
   );
 
+  const scolledIndex = useMemo(
+    () =>
+      post.headings.findIndex(
+        (v) => v.content.trim() === lastOnScreen?.textContent?.trim(),
+      ),
+    [lastOnScreen?.textContent, post.headings],
+  );
+
   usePageTitle(post?.title);
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -47,9 +55,7 @@ const PostPage: NextPage<Props> = ({ post }) => {
                     level: head.level,
                     content: head.content,
                   }))}
-                  highlightIndexSelector={
-                    lastOnScreen?.textContent?.trim() ?? ""
-                  }
+                  highlightIndex={scolledIndex}
                 />
               </HeadingHolder>
             </HeadingContainer>
