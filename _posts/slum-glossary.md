@@ -27,7 +27,7 @@ hsjoihsの食事写真に対する感想の一つ。hsjoihsはスマホもしく
 cf. [subwaysb](#subwaysb)
 
 ### いなむのたまたま
-[いたむのみたまのかみ](https://twitter.com/mitama_rs)のこと。
+[いなむのみたまのかみ](https://twitter.com/mitama_rs)のこと。
 
 ### ｳｳｳｳｳｳｳｳｳｳｯ
 cf. [たーにゃAPI](#たーにゃapi)
