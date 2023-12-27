@@ -4,6 +4,7 @@ import ErrorPage from "next/error";
 import markdownToHtml from "zenn-markdown-html";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styled from "@emotion/styled";
+import { useMemo, useState } from "react";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
 
 import { PostOGP } from "@/components/common/PostOGP";
@@ -11,6 +12,7 @@ import { PostOGP } from "@/components/common/PostOGP";
 import usePageTitle from "src/hooks/usePageTitle";
 import { Post } from "@/model/Post";
 import HeadingList from "@/components/common/HeadingList";
+import useLastOnScreen from "src/hooks/useLastOnScreen";
 
 type Props = {
   readonly post: Post;
@@ -18,6 +20,21 @@ type Props = {
 
 const PostPage: NextPage<Props> = ({ post }) => {
   const router = useRouter();
+
+  const [lastOnScreen, setLastOnScreen] = useState<HTMLElement | null>(null);
+
+  const { targetRef } = useLastOnScreen<HTMLDivElement>("h1,h2,h3", (ent) =>
+    setLastOnScreen(ent.target as HTMLElement),
+  );
+
+  const scolledIndex = useMemo(
+    () =>
+      post.headings.findIndex(
+        (v) => v.content.trim() === lastOnScreen?.textContent?.trim(),
+      ),
+    [lastOnScreen?.textContent, post.headings],
+  );
+
   usePageTitle(post?.title);
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -25,21 +42,22 @@ const PostPage: NextPage<Props> = ({ post }) => {
 
   return (
     <div>
-      <div />
       {router.isFallback ? (
         <div>Loading…</div>
       ) : (
-        // 目次が非表示のときは display を block にしないと変に右寄りになる
-        <Container style={{ display: post.show_index ? "grid" : "block" }}>
+        <Container>
           {post.show_index && (
             <HeadingContainer className="heading-container">
-              <HeadingList
-                title="目次"
-                items={post.headings.map((head) => ({
-                  level: head.level,
-                  content: head.content,
-                }))}
-              />
+              <HeadingHolder>
+                <HeadingList
+                  title="目次"
+                  items={post.headings.map((head) => ({
+                    level: head.level,
+                    content: head.content,
+                  }))}
+                  highlightIndex={scolledIndex}
+                />
+              </HeadingHolder>
             </HeadingContainer>
           )}
           <WikiArticle className="mb-32 znc">
@@ -50,7 +68,10 @@ const PostPage: NextPage<Props> = ({ post }) => {
               url={`https://lipersinslums.github.io/posts/${post.slug}`}
             />
 
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            <div
+              ref={targetRef}
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            ></div>
           </WikiArticle>
         </Container>
       )}
@@ -106,6 +127,8 @@ const Container = styled.main`
 
   @media screen and (max-width: 768px) {
     display: block;
+    grid-template-columns: none;
+    column-gap: inherit;
   }
 `;
 
@@ -113,6 +136,14 @@ const HeadingContainer = styled.div`
   @media screen and (max-width: 768px) {
     display: none;
   }
+`;
+
+const HeadingHolder = styled.div`
+  position: sticky;
+  top: 30px;
+
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
 `;
 
 const WikiArticle = styled.article`

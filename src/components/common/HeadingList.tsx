@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { useEffect, useRef } from "react";
 
 type Props = {
   title: string;
@@ -7,20 +8,39 @@ type Props = {
     content: string;
     level: number;
   }[];
+  highlightIndex: number;
 };
 
-export default function HeadingList({ items, title }: Props) {
+export default function HeadingList({ highlightIndex, items, title }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const target = containerRef.current?.querySelector?.(
+      `#index_${highlightIndex}`,
+    );
+    if (target) {
+      const top = (target as HTMLElement).offsetTop - 200;
+      containerRef.current?.scrollTo?.({
+        top: top > 0 ? top : 0,
+      });
+    }
+  }, [highlightIndex, items]);
+
   return (
-    <Container>
+    <Container ref={containerRef}>
       <Title>{title}</Title>
       {items.map((item, index) => {
         const Heading = headings[item.level - 1];
+        const isHighlighted =
+          highlightIndex > index ? "highlighted" : undefined;
         return (
           <Heading
+            id={`index_${index}`}
+            className={`${isHighlighted ?? ""}`}
             href={`#${encodeURIComponent(
               item.content.replace(/\s/g, "-").toLowerCase(),
             )}`}
-            key={index}
+            key={`${index}_${isHighlighted}`}
           >
             {item.content}
           </Heading>
@@ -35,8 +55,8 @@ const Container = styled.div`
   flex-direction: column;
   gap: 0.1rem;
   padding: 8px;
-  border-top: 2px solid #ddd;
-  border-bottom: 2px solid #ddd;
+  max-height: 70vh;
+  overflow-y: scroll;
 `;
 
 const Title = styled.div`
@@ -44,24 +64,46 @@ const Title = styled.div`
   font-weight: bold;
 `;
 
+const inactiveColor = "#333";
+
+const weightAnim = css`
+  @keyframes weight {
+    from {
+      font-weight: 100;
+    }
+    to {
+      font-weight: 900;
+    }
+  }
+`;
+
 const headingStyle = css`
-  color: #333;
+  ${weightAnim}
+  display: inline-block;
+  color: ${inactiveColor};
   text-decoration: none;
+  font-weight: 100;
+
   &:visited {
-    color: #333;
+    color: ${inactiveColor};
   }
   &:active {
-    color: #333;
+    color: ${inactiveColor};
   }
   cursor: pointer;
   :hover {
+    text-decoration: underline;
+  }
+  &.highlighted {
+    color: #336;
+    /* cubic-bezier(0.22, 1, 0.36, 1) => easeOutQuint */
+    animation: 0.5s weight cubic-bezier(0.22, 1, 0.36, 1) forwards;
     &:visited {
-      color: #333;
+      color: #336;
     }
     &:active {
-      color: #333;
+      color: #336;
     }
-    text-decoration: underline;
   }
 `;
 
