@@ -1,6 +1,6 @@
 # LipersInSlums Wiki
 
-![LipersInSlums](https://cdn.discordapp.com/attachments/631498547610779659/631866413606371361/lipers_in_slums_03.png)
+![LipersInSlums](https://github.com/LipersInSlums/LipersInSlums.github.io/blob/master/public/lipers_in_slums_03_print_size.svg?raw=true)
 
 ## Getting Started
 
