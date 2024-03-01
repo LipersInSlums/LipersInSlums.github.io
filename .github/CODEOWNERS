@@ -1,3 +1,8 @@
-* @Lugendre
-/.gitignore
-/_posts/
+/.github @Lugendre
+/.husky @Lugendre
+/lib @Lugendre
+/pages @Lugendre
+/public @Lugendre
+/src @Lugendre
+/styles @Lugendre
+/* @Lugendre
