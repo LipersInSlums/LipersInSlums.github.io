@@ -276,6 +276,9 @@ Lugendreの秘密のScrapbox。秘密だが、idはLugendrePublicである。
 ### 美容と健康
 スラムのチャンネルの一つ。なぜか二つある。
 
+### ヒンジ壊しのhsjoihs
+[Togetter](https://togetter.com/li/1971807)参照。[続編もある](https://togetter.com/li/2209175)。
+
 ### ぶ、ぶええええええええええええええええっ
 cf. [たーにゃAPI](#たーにゃapi)
 
@@ -329,12 +332,15 @@ cf. [ヤーナム市民](./glossary-for-slum-doctors#ヤーナム市民)
 ### ゆうれい，いぞん，そんざい，ﾗｧｩﾝｸﾄｩｩﾎﾟﾘﾓｫﾌｨｼﾞｩﾑｯ
 [秘密のスクラップボックスの一記事](https://scrapbox.io/LugendrePublic/%E3%82%86%E3%81%86%E3%82%8C%E3%81%84%EF%BC%8C%E3%81%84%E3%81%9E%E3%82%93%EF%BC%8C%E3%81%9D%E3%82%93%E3%81%96%E3%81%84%EF%BC%8C%EF%BE%97%EF%BD%A7%EF%BD%A9%EF%BE%9D%EF%BD%B8%EF%BE%84%EF%BD%A9%EF%BD%A9%EF%BE%8E%EF%BE%9F%EF%BE%98%EF%BE%93%EF%BD%AB%EF%BE%8C%EF%BD%A8%EF%BD%BC%EF%BE%9E%EF%BD%A9%EF%BE%91%EF%BD%AF)のタイトル。
 
-cf. [秘密のScrapbox](#秘密のScrapbox)
+cf. [秘密のScrapbox](#秘密のscrapbox)
 
 ### 良き夢
 IS#3のステージ「良き夢は何処に」のこと。
 
 cf. [制御不能](./glossary-for-slum-doctors#制御不能)
+
+### よく見ると完全グラフになってる
+cf. [C++と死の秘宝](#c%2B%2Bと死の秘宝)
 
 ## ら行
 ### ルーブル美術館
@@ -369,7 +375,9 @@ jellyfish_rumbleのこと。Alweとjellyfish_rumbleが[魯珈](https://twitter.c
 cf. [うわーん！枕がデカすぎます！](#うわーん！枕がデカすぎます！)
 
 ### C++と死の秘宝
+[いなむのみたまのかみの記事](https://qiita.com/_EnumHack/items/577b087c071e4e9cd3b3)。
 
+cf. [よく見ると完全グラフになってる](#よく見ると完全グラフになってる)
 
 ### FATALITY…
 cf. [デスモモイ](#デスモモイ)
