@@ -25,8 +25,7 @@ const channelInfo: ChannelInfo[] = [
     topic: "Colorless green ideas sleep furiously",
     description: "ダジャレ的なものを貼るやつ",
     since: "2018/04/26",
-    notes: [
-      "channel topicはチョムスキーの例文から。"],
+    notes: ["channel topicはチョムスキーの例文から。"],
     refs: [],
   },
   {
@@ -67,7 +66,7 @@ const channelInfo: ChannelInfo[] = [
       },
       {
         name: "#こりーさんのぺろいわからせ棒",
-        href: "/channelsinslums/こりーさんのぺろいわからせ棒",
+        href: "/ChannelsInSlums/こりーさんのぺろいわからせ棒",
       },
     ],
   },
@@ -127,7 +126,7 @@ const channelInfo: ChannelInfo[] = [
     refs: [
       {
         name: "ruby-on-rails（金切り声）",
-        href: "/channelsinslums/ruby-on-rails（金切り声）",
+        href: "/ChannelsInSlums/ruby-on-rails（金切り声）",
       },
     ],
   },
@@ -211,11 +210,11 @@ const channelInfo: ChannelInfo[] = [
     refs: [
       {
         name: "#エロゲ",
-        href: "/channelsinslums/エロゲ",
+        href: "/ChannelsInSlums/エロゲ",
       },
       {
         name: "#雀荘『る雀どる』",
-        href: "/channelsinslums/雀荘『る雀どる』",
+        href: "/ChannelsInSlums/雀荘『る雀どる』",
       },
     ],
   },
@@ -336,7 +335,7 @@ const channelInfo: ChannelInfo[] = [
     refs: [
       {
         name: "#こりーさんドスケベボディ部",
-        href: "/channelsinslums/こりーさんドスケベボディ部",
+        href: "/ChannelsInSlums/こりーさんドスケベボディ部",
       },
     ],
   },
@@ -349,7 +348,7 @@ const channelInfo: ChannelInfo[] = [
     refs: [
       {
         name: "じんこうちのう(裏声)",
-        href: "/channelsinslums/じんこうちのう(裏声)",
+        href: "/ChannelsInSlums/じんこうちのう(裏声)",
       },
     ],
   },
