@@ -2,7 +2,7 @@ import { ParsedUrlQuery } from "querystring";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ChannelInfo } from "@/model/Channel";
 import { getAllChannelInfos, getAllChannelNames } from "@/lib/channels";
-import Channel from "src/pages/ChannelsInSlums/ChannelPage";
+import Channel from "src/pages/ChannelsInSlums/Channel";
 
 type Props = {
   readonly channel: ChannelInfo;

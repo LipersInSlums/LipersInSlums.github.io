@@ -4,7 +4,7 @@ const channelInfo: ChannelInfo[] = [
   {
     name: "クソスレ",
     topic: "雑談",
-    description: "(no reference)",
+    description: "",
     since: "2018/04/25",
     notes: [
       "どこで発言するか迷ったとき用の場所。新年の挨拶やクリスマスの話、およびアドベントカレンダーの話などはここ。",
@@ -16,7 +16,7 @@ const channelInfo: ChannelInfo[] = [
     name: "存在論",
     topic: '"在る"',
     description: "シュールなのを貼るやつ",
-    since: "",
+    since: "2018/04/26",
     notes: [],
     refs: [],
   },
@@ -24,15 +24,16 @@ const channelInfo: ChannelInfo[] = [
     name: "意味論",
     topic: "Colorless green ideas sleep furiously",
     description: "ダジャレ的なものを貼るやつ",
-    since: "",
-    notes: [],
+    since: "2018/04/26",
+    notes: [
+      "channel topicはチョムスキーの例文から。"],
     refs: [],
   },
   {
     name: "lisperはすぐそういうこと言う",
     topic: "そういうことだぞ",
     description: "Lisp",
-    since: "",
+    since: "2018/04/26",
     notes: [
       "Lispチャンネル。実はサーバー名の「LipersInSlums」のLipers部分はLispersのtypoらしい。",
     ],
@@ -44,7 +45,7 @@ const channelInfo: ChannelInfo[] = [
     description: "CS",
     since: "2018/04/26",
     notes: [
-      "計算機科学や、アルゴリズムのチャンネル。",
+      "計算機科学やアルゴリズムのチャンネル。",
       "channel topicはこのチャンネル最初の発言から。（yuche13……）",
     ],
     refs: [],
@@ -120,10 +121,15 @@ const channelInfo: ChannelInfo[] = [
   {
     name: "じんこうちのう(裏声)",
     topic: "",
-    description: "",
+    description: "じんこうちのう(裏声)",
     since: "2018/05/03",
-    notes: [],
-    refs: [],
+    notes: ["AIや機械学習のチャンネル。"],
+    refs: [
+      {
+        name: "ruby-on-rails（金切り声）",
+        href: "/channelsinslums/ruby-on-rails（金切り声）",
+      },
+    ],
   },
   {
     name: "あーき！！！！！！！！！！！！、！",
@@ -156,8 +162,18 @@ const channelInfo: ChannelInfo[] = [
     topic: "",
     description: "NSFW",
     since: "2018/05/04",
-    notes: [],
-    refs: [],
+    notes: [
+      "不審者情報や下ネタのチャンネル。",
+      "天皇と呼ばれる存在(@Tzimtzum)がいる。",
+      "天皇の好きな、ガルパンとアイマスの話もここに貼られる。",
+      "うんこして報告すると褒められる。",
+    ],
+    refs: [
+      {
+        name: "尻穴猫寂聴",
+        href: "/posts/slum-glossary#尻穴猫寂聴",
+      },
+    ],
   },
   {
     name: "就職相談窓口",
@@ -189,7 +205,8 @@ const channelInfo: ChannelInfo[] = [
     description: "なんかゲーム総合みたいになってる気がする",
     since: "2018/07/07",
     notes: [
-      "PCゲームをはじめとするコンシューマーゲームのチャンネル。エロゲは #エロゲ 、音ゲーは #雀荘『る雀どる』 へ。",
+      "PCゲームをはじめとするコンシューマーゲームのチャンネル。",
+      "エロゲは #エロゲ 、音ゲーは #雀荘『る雀どる』 へ。",
     ],
     refs: [
       {
@@ -226,7 +243,10 @@ const channelInfo: ChannelInfo[] = [
     topic: "",
     description: "@Lugendre のスクショを貼ってバトル！",
     since: "2018/11/22",
-    notes: [],
+    notes: [
+      "他人の発言を晒すバトル会場。@Lugendreでもスクショでもないことも多々ある。",
+      "@Lugendreがハマっているもの（オーディオ、PCガジェット、紅茶など）の話が始まることも多い。",
+    ],
     refs: [],
   },
   {
@@ -302,7 +322,7 @@ const channelInfo: ChannelInfo[] = [
     description: "LipersInSlumsの同人誌",
     since: "2019/10/09",
     notes: [
-      "技術書典での頒布を目指して皆で合同誌を作るチャンネルだった。",
+      "技術書典での頒布を目指して皆で合同誌を作るチャンネル。",
       "コロナ禍のため2020年の技術書典がオンライン開催になったため合同誌企画自体が流れた。",
     ],
     refs: [],
@@ -326,7 +346,12 @@ const channelInfo: ChannelInfo[] = [
     description: "Ruby on Rails",
     since: "2020/12/31",
     notes: [],
-    refs: [],
+    refs: [
+      {
+        name: "じんこうちのう(裏声)",
+        href: "/channelsinslums/じんこうちのう(裏声)",
+      },
+    ],
   },
   {
     name: "夏草や隣の部屋でふぁっく音",
