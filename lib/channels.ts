@@ -26,7 +26,12 @@ const channelInfo: ChannelInfo[] = [
     description: "ダジャレ的なものを貼るやつ",
     since: "2018/04/26",
     notes: ["channel topicはチョムスキーの例文から。"],
-    refs: [],
+    refs: [
+      {
+        name: "Colorless green ideas sleep furiously (Wikipedia)",
+        href: "https://ja.wikipedia.org/wiki/Colorless_green_ideas_sleep_furiously",
+      },
+    ],
   },
   {
     name: "lisperはすぐそういうこと言う",
@@ -288,7 +293,11 @@ const channelInfo: ChannelInfo[] = [
     topic: "オブジェクト指向全般\n今すぐダウンロー\nド",
     description: "oop",
     since: "2019/05/16",
-    notes: [],
+    notes: [
+      "オブジェクト指向全般",
+      "今すぐダウンロー",
+      "ド"
+    ],
     refs: [],
   },
   {
