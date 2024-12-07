@@ -14,7 +14,7 @@ export default function ChannelsInSlums() {
         {channelInfos.map(({ description, name }) => {
           return (
             <Item key={name}>
-              <Link href={`channelsinslums/${name}`}>{name}</Link>
+              <Link href={`ChannelsInSlums/${name}`}>{name}</Link>
               {description ? `: ${description}` : ""}
             </Item>
           );
