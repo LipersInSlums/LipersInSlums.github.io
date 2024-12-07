@@ -362,7 +362,15 @@ export const channelInfo: ChannelInfo[] = [
     topic: "音楽理論やその他文化資本",
     description: "音および文化資本",
     since: "2021/06/13",
-    notes: ["音楽、絵画、酒、ボドゲなどの文化的な諸々に関するチャンネル。"],
-    refs: [],
+    notes: [
+      "音楽、絵画、酒、ボドゲなどの文化的な諸々に関するチャンネル。",
+      "派生サイトとして、スラム民が各々のオススメ音源を紹介するscrapboxがある(下記の外部リンク参照)。"
+    ],
+    refs: [
+      {
+        name: "音楽のすゝめ",
+        href: "https://scrapbox.io/music-recommendation/"
+      },
+    ],
   },
 ];
