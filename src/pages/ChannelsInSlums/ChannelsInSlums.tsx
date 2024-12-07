@@ -1,16 +1,21 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { getAllChannelNames } from "@/lib/channels";
+import { getAllChannelInfos } from "@/lib/channels";
+import usePageTitle from "src/hooks/usePageTitle";
 
 export default function ChannelsInSlums() {
-  const channelNames = getAllChannelNames();
+  usePageTitle("ChannelsInSlums");
+
+  const channelInfos = getAllChannelInfos();
+
   return (
     <Wrap>
       <ChannelList>
-        {channelNames.map((name) => {
+        {channelInfos.map(({ description, name }) => {
           return (
             <Item key={name}>
               <Link href={`channelsinslums/${name}`}>{name}</Link>
+              {description ? `: ${description}` : ""}
             </Item>
           );
         })}
@@ -26,6 +31,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 4px 16px;
 `;
 
 const ChannelList = styled.ul`
