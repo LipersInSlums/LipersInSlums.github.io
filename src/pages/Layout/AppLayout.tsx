@@ -95,6 +95,7 @@ const MenuWrap = styled.div`
     width: 4px;
     height: 2px;
     background: #000;
+    color: #000;
   }
 `;
 
