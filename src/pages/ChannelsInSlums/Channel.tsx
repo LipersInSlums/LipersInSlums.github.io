@@ -6,10 +6,11 @@ import usePageTitle from "src/hooks/usePageTitle";
 
 type Props = {
   readonly channel: ChannelInfo;
+  readonly content: string;
 };
 
-export default function Channel({ channel }: Props) {
-  const { description, name, notes, refs, since, topic } = channel;
+export default function Channel({ channel, content }: Props) {
+  const { description, name, refs, since, topic } = channel;
   usePageTitle(name);
   return (
     <Wrap>
@@ -26,11 +27,7 @@ export default function Channel({ channel }: Props) {
         <br />
         {description ? `「${description}」` : ""}
       </div>
-      <div>
-        {notes.map((note) => {
-          return <p key={note}>{note}</p>;
-        })}
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: content }}></div>
       <ReferenceWrap>
         {refs.map(({ href, name }) => {
           return (
