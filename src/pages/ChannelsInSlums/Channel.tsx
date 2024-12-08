@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Link from "next/link";
+import { format } from "date-fns";
 import { ChannelInfo } from "@/model/Channel";
 import usePageTitle from "src/hooks/usePageTitle";
 
@@ -23,7 +24,7 @@ export default function Channel({ channel, content }: Props) {
           {topic ? <Topic>{topic}</Topic> : ""}
         </Title>
         <i>since: </i>
-        {since}
+        {format(new Date(since), "yyyy/MM/dd")}
         <br />
         {description ? `「${description}」` : ""}
       </div>
