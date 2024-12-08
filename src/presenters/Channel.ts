@@ -32,7 +32,7 @@ export function getChannelByName(name: string): ChannelInfo {
   try {
     return parseChannel(`_channels/${name}.md`);
   } catch {
-    console.log("Channel not found: " + name);
+    console.warn("Channel not found: " + name);
 
     const channelIndex = channelInfo.findIndex((ch) => ch.name === name);
     if (channelIndex === -1) {
