@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { getAllChannelInfos } from "@/lib/channels";
+import { getAllChannelInfos } from "src/presenters/Channel";
 import usePageTitle from "src/hooks/usePageTitle";
 
 export default function ChannelsInSlums() {
