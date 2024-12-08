@@ -6,7 +6,16 @@ import { Container } from "@mui/material";
 import { Copyright } from "@/components/templates/materials";
 import LisperInSlumsLogo from "@/components/atoms/LisperInSlumsLogo.svg";
 
-export default function AppLayout({ Component, pageProps }: AppProps<object>) {
+type Menu = {
+  href: string;
+  label: string;
+};
+
+type Props = {
+  menus: Menu[];
+} & AppProps<object>;
+
+export default function AppLayout({ Component, menus, pageProps }: Props) {
   return (
     <PageWrap>
       <HeaderWrap>
@@ -17,8 +26,11 @@ export default function AppLayout({ Component, pageProps }: AppProps<object>) {
         </LogoWrap>
       </HeaderWrap>
       <MenuWrap>
-        <Link href="/">Blog</Link>
-        <Link href="/channels">Channels</Link>
+        {menus.map(({ href, label }) => (
+          <Link key={href} href={href}>
+            {label}
+          </Link>
+        ))}
       </MenuWrap>
       <AppWrap maxWidth="xl">
         <ComponentWrap>
