@@ -1,72 +1,103 @@
 import styled from "@emotion/styled";
-import ArrowBack from "@mui/icons-material/ArrowBack";
 import Link from "next/link";
 import { format } from "date-fns";
 import { ChannelInfo } from "@/model/Channel";
 import usePageTitle from "src/hooks/usePageTitle";
+import ChannelList from "src/pages/ChannelsInSlums/ChannelList";
 
 type Props = {
-  readonly channel: ChannelInfo;
-  readonly content: string;
+  channels: ChannelInfo[];
+  content: string;
+
+  description?: string;
+  name?: string;
+  refs?: { href: string; name: string }[];
+  since?: string;
+  topic?: string;
 };
 
-export default function Channel({ channel, content }: Props) {
-  const { description, name, refs, since, topic } = channel;
+export default function Channel({
+  channels,
+  content,
+  description,
+  name,
+  refs,
+  since,
+  topic,
+}: Props) {
   usePageTitle(name);
   return (
     <Wrap>
-      <div>
-        <Title>
-          <Back href="./">
-            <ArrowBack />
-          </Back>
-          <Name>{name}</Name>
-          {topic ? <Topic>{topic}</Topic> : ""}
-        </Title>
-        <i>since: </i>
-        {format(new Date(since), "yyyy/MM/dd")}
-        <br />
-        {description ? `「${description}」` : ""}
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: content }}></div>
-      <ReferenceWrap>
-        {refs.map(({ href, name }) => {
-          return (
-            <Reference key={name}>
-              <Link href={href}>{name}</Link>
-            </Reference>
-          );
-        })}
-      </ReferenceWrap>
+      <ListWrap>
+        <ChannelList channels={channels} />
+      </ListWrap>
+      <ContentWrap>
+        <TitleWrap>
+          <Title>
+            {name ? <Name>{name}</Name> : ""}
+            {topic ? <Topic>{topic}</Topic> : ""}
+          </Title>
+          {since ? (
+            <>
+              <i>since: </i>
+              {format(new Date(since), "yyyy/MM/dd")}
+            </>
+          ) : (
+            ""
+          )}
+          <br />
+          {description ? `「${description}」` : ""}
+        </TitleWrap>
+        <div dangerouslySetInnerHTML={{ __html: content }}></div>
+        <ReferenceWrap>
+          {refs?.map(({ href, name }) => {
+            return (
+              <Reference key={name}>
+                <Link target="_blank" rel="noopener noreferrer" href={href}>
+                  {name}
+                </Link>
+              </Reference>
+            );
+          })}
+        </ReferenceWrap>
+      </ContentWrap>
     </Wrap>
   );
 }
 
 const Wrap = styled.div`
+  display: flex;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
   text-align: center;
-  padding: 4px 16px;
+`;
+
+const ListWrap = styled.div`
+  position: sticky;
+  top: 30px;
+
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+`;
+
+const ContentWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+`;
+
+const TitleWrap = styled.header`
+  text-align: right;
 `;
 
 const Title = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   margin-top: 0.83em;
-
-  @media screen and (min-width: 450px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
-const Back = styled(Link)`
-  color: #333;
-
-  @media screen and (min-width: 450px) {
-    margin-right: 1em;
-    margin-top: 0.2em;
-  }
+  text-align: left;
+  margin-left: 2em;
 `;
 
 const Name = styled.div`
