@@ -5,10 +5,19 @@ export function getAllChannelInfos(): ChannelInfo[] {
 }
 
 export function getAllChannelNames(): string[] {
-  return Array.from(channelInfo, (info) => info.name);
+  return channelInfo.filter((ch) => !ch.ignoreList).map((ch) => ch.name);
 }
 
 const channelInfo: ChannelInfo[] = [
+  {
+    ignoreList: true,
+    name: "",
+    topic: "",
+    description: "",
+    since: "",
+    md: "_channels/_index.md",
+    refs: [],
+  },
   {
     name: "クソスレ",
     topic: "雑談",
