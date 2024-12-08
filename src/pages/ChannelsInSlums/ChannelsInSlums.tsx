@@ -1,20 +1,22 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { getAllChannelInfos } from "src/presenters/Channel";
 import usePageTitle from "src/hooks/usePageTitle";
+import { ChannelInfo } from "@/model/Channel";
 
-export default function ChannelsInSlums() {
+type Props = {
+  readonly channels: ChannelInfo[];
+};
+
+export default function ChannelsInSlums({ channels }: Props) {
   usePageTitle("ChannelsInSlums");
-
-  const channelInfos = getAllChannelInfos();
 
   return (
     <Wrap>
       <ChannelList>
-        {channelInfos.map(({ description, name }) => {
+        {channels.map(({ description, name }) => {
           return (
             <Item key={name}>
-              <Link href={`ChannelsInSlums/${name}`}>{name}</Link>
+              <Link href={`channels/${name}`}>{name}</Link>
               {description ? `: ${description}` : ""}
             </Item>
           );
