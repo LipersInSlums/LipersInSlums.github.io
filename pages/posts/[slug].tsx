@@ -91,7 +91,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   if (!params) {
     throw Error("getStaticPaths failed!");
   }
-  const post = getPostBySlug(params.slug);
+
+  const post = getPostBySlug(`${params.slug}.md`);
 
   const content = await markdownToHtml(post.content);
 
