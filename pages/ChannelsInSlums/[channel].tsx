@@ -1,7 +1,7 @@
 import { ParsedUrlQuery } from "querystring";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ChannelInfo } from "@/model/Channel";
-import { getAllChannelInfos, getAllChannelNames } from "@/lib/channels";
+import { getAllChannelInfos, getAllChannelNames } from "src/presenters/Channel";
 import Channel from "src/pages/ChannelsInSlums/Channel";
 
 type Props = {

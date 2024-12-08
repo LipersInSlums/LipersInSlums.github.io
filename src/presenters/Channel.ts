@@ -1,6 +1,14 @@
 import { ChannelInfo } from "@/model/Channel";
 
-export const channelInfo: ChannelInfo[] = [
+export function getAllChannelInfos(): ChannelInfo[] {
+  return channelInfo;
+}
+
+export function getAllChannelNames(): string[] {
+  return Array.from(channelInfo, (info) => info.name);
+}
+
+const channelInfo: ChannelInfo[] = [
   {
     name: "クソスレ",
     topic: "雑談",
