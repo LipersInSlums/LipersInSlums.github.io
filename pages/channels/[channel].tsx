@@ -1,15 +1,17 @@
 import { ParsedUrlQuery } from "querystring";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import markdownToHtml from "zenn-markdown-html";
 import { ChannelInfo } from "@/model/Channel";
-import { getAllChannels } from "src/presenters/Channel";
+import { getAllChannels, getChannelByName } from "src/presenters/Channel";
 import Channel from "src/pages/ChannelsInSlums/Channel";
 
 type Props = {
   readonly channel: ChannelInfo;
+  readonly content: string;
 };
 
-const ChannelPage: NextPage<Props> = ({ channel }: Props) => {
-  return <Channel channel={channel} />;
+const ChannelPage: NextPage<Props> = (props: Props) => {
+  return <Channel {...props} />;
 };
 
 export default ChannelPage;
@@ -25,14 +27,13 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
     throw Error("getStaticPaths failed!");
   }
   const name = params.channel;
-  const channelInfos = getAllChannels();
-  const channel = channelInfos.filter((info) => info.name === name)[0];
+  const channel = getChannelByName(`${name}.md`);
+  const content = await markdownToHtml(channel.notes.join("\n\n"));
 
   return {
     props: {
-      channel: {
-        ...channel,
-      },
+      channel: channel,
+      content,
     },
   };
 };
