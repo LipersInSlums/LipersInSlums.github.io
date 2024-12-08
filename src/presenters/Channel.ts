@@ -35,7 +35,7 @@ export function getAllChannels(): ChannelInfo[] {
     getChannelByName(channel),
   );
 
-  const ch = markdownChannels
+  return markdownChannels
     .concat(
       channelInfo.map((ch, index) => ({
         ...ch,
@@ -45,9 +45,6 @@ export function getAllChannels(): ChannelInfo[] {
     )
     .filter((ch) => !ch.ignoreList)
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-  console.log(ch);
-
-  return ch;
 }
 
 const channelInfo: Omit<ChannelInfo, "order" | "realPath">[] = [
