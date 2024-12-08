@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import markdownToHtml from "zenn-markdown-html";
 import { ChannelInfo } from "@/model/Channel";
 import { getAllChannels, getChannelByName } from "src/presenters/Channel";
-import Channel from "src/pages/ChannelsInSlums/Channel";
+import ChannelPage from "src/pages/ChannelsInSlums/ChannelPage";
 
 type Props = {
   channels: ChannelInfo[];
@@ -11,20 +11,11 @@ type Props = {
   content: string;
 };
 
-const ChannelPage: NextPage<Props> = (props: Props) => {
-  return (
-    <Channel
-      {...props}
-      description={props.channel.description}
-      name={props.channel.name}
-      refs={props.channel.refs}
-      since={props.channel.since}
-      topic={props.channel.topic}
-    />
-  );
+const ChannelsInSlumsIndex: NextPage<Props> = (props: Props) => {
+  return <ChannelPage {...props} />;
 };
 
-export default ChannelPage;
+export default ChannelsInSlumsIndex;
 
 type Params = ParsedUrlQuery & {
   channel: string;
