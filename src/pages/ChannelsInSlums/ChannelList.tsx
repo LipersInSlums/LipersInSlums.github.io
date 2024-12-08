@@ -11,31 +11,20 @@ export default function ChannelList({ channels }: Props) {
   usePageTitle("ChannelsInSlums");
 
   return (
-    <Wrap>
-      <ChannelWrap>
-        {channels.map(({ description, name, realPath }) => {
-          return (
-            <Item key={realPath}>
-              <Link href={`/channels/${realPath}`}>{name}</Link>
-              <Description>{description ?? ""}</Description>
-            </Item>
-          );
-        })}
-      </ChannelWrap>
-    </Wrap>
+    <ChannelWrap>
+      {channels.map(({ description, name, realPath }) => {
+        return (
+          <Item key={realPath}>
+            <Link href={`/channels/${realPath}`}>{name}</Link>
+            <Description>{description ?? ""}</Description>
+          </Item>
+        );
+      })}
+    </ChannelWrap>
   );
 }
 
-const Wrap = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-`;
-
 const ChannelWrap = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   padding: 0;
 `;
 

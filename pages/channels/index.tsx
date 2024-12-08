@@ -4,7 +4,7 @@ import markdownToHtml from "zenn-markdown-html";
 import { ChannelInfo } from "@/model/Channel";
 
 import { getAllChannels, getChannelByName } from "src/presenters/Channel";
-import Channel from "src/pages/ChannelsInSlums/Channel";
+import ChannelsIndex from "src/pages/ChannelsInSlums/ChannelsIndex";
 
 type Props = {
   channels: ChannelInfo[];
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function ChannelsInSlumsIndex(props: Props) {
-  return <Channel name="LipersInSlums サーバーへようこそ" {...props} />;
+  return <ChannelsIndex {...props} />;
 }
 
 export const getStaticProps: GetStaticProps<Props, Params> = async () => {
