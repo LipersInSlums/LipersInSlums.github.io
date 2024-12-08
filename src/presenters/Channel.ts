@@ -34,15 +34,20 @@ export function getAllChannels(): ChannelInfo[] {
   const markdownChannels = markdownChannelPaths.map((channel) =>
     getChannelByName(channel),
   );
-  return channelInfo
-    .map((ch, index) => ({
-      ...ch,
-      realPath: ch.name,
-      order: index,
-    }))
-    .concat(markdownChannels)
+
+  const ch = markdownChannels
+    .concat(
+      channelInfo.map((ch, index) => ({
+        ...ch,
+        realPath: ch.name,
+        order: index + 1,
+      })),
+    )
     .filter((ch) => !ch.ignoreList)
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  console.log(ch);
+
+  return ch;
 }
 
 const channelInfo: Omit<ChannelInfo, "order" | "realPath">[] = [
