@@ -7,6 +7,4 @@ topic: ''
 ignore_list: true
 ---
 
-# LipersInSlums サーバーへようこそ。
-
 生きて帰れると思うなよ
