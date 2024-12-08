@@ -7,6 +7,6 @@ topic: ''
 ignore_list: true
 ---
 
-# LipersInSlums チャンネルへようこそ。
+# LipersInSlums サーバーへようこそ。
 
 生きて帰れると思うなよ
