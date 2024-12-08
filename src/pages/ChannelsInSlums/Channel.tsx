@@ -15,7 +15,7 @@ export default function Channel({ channel }: Props) {
     <Wrap>
       <div>
         <Title>
-          <Back href="/ChannelsInSlums/">
+          <Back href="./">
             <ArrowBack />
           </Back>
           <Name>{name}</Name>

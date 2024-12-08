@@ -1,34 +1,51 @@
-import { ChannelInfo } from "@/model/Channel";
+import path from "path";
+import fs from "fs";
+import matter from "gray-matter";
+import { ChannelInfo, parseChannelSchema } from "@/model/Channel";
+import { getFiles } from "@/lib/api";
 
-export function getAllChannelInfos(): ChannelInfo[] {
-  return channelInfo;
+function parseChannel(channelPath: `_channels/${string}`): ChannelInfo {
+  const fullPath = path.resolve(channelPath);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { content, data } = matter(fileContents);
+
+  const name = (fullPath.split("/").pop() ?? "").replace(".md", "");
+  const parsed = parseChannelSchema.parse(data);
+
+  return {
+    description: parsed.description,
+    name: parsed.name ?? name,
+    notes: [content],
+    refs: parsed.refs ?? [],
+    since: parsed.since,
+    topic: parsed.topic,
+    ignoreList: parsed.ignore_list ?? false,
+    order: parsed.order,
+    realPath: path.basename(fullPath),
+  };
 }
 
-export function getAllChannelNames(): string[] {
-  return channelInfo.filter((ch) => !ch.ignoreList).map((ch) => ch.name);
+export function getChannelByName(name: string): ChannelInfo {
+  return parseChannel(`_channels/${name}`);
 }
 
-const channelInfo: ChannelInfo[] = [
-  {
-    ignoreList: true,
-    name: "",
-    topic: "",
-    description: "",
-    since: "",
-    md: "_channels/_index.md",
-    refs: [],
-  },
-  {
-    name: "クソスレ",
-    topic: "雑談",
-    description: "",
-    since: "2018/04/25",
-    notes: [
-      "どこで発言するか迷ったとき用の場所。新年の挨拶やクリスマスの話、およびアドベントカレンダーの話などはここ。",
-      "LipersInSlumsというサーバーのlanding channelでもある。",
-    ],
-    refs: [],
-  },
+export function getAllChannels(): ChannelInfo[] {
+  const markdownChannelPaths = getFiles("_channels");
+  const markdownChannels = markdownChannelPaths.map((channel) =>
+    getChannelByName(channel),
+  );
+  return channelInfo
+    .map((ch, index) => ({
+      ...ch,
+      realPath: ch.name,
+      order: index,
+    }))
+    .concat(markdownChannels)
+    .filter((ch) => !ch.ignoreList)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+
+const channelInfo: Omit<ChannelInfo, "order" | "realPath">[] = [
   {
     name: "存在論",
     topic: '"在る"',
