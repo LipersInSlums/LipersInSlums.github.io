@@ -13,10 +13,10 @@ export default function ChannelsInSlums({ channels }: Props) {
   return (
     <Wrap>
       <ChannelList>
-        {channels.map(({ description, name }) => {
+        {channels.map(({ description, name, realPath }) => {
           return (
             <Item key={name}>
-              <Link href={`channels/${name}`}>{name}</Link>
+              <Link href={`channels/${realPath}`}>{name}</Link>
               {description ? `: ${description}` : ""}
             </Item>
           );

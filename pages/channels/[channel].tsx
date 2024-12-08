@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
     throw Error("getStaticPaths failed!");
   }
   const name = params.channel;
-  const channel = getChannelByName(`${name}.md`);
+  const channel = getChannelByName(name);
   const content = await markdownToHtml(channel.notes.join("\n\n"));
 
   return {
@@ -39,7 +39,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const channelNames = getAllChannels().map((channel) => channel.name);
+  const channelNames = getAllChannels().map(
+    (channel) => channel.realPath ?? channel.name,
+  );
 
   return {
     paths: channelNames.map((channelName) => {
