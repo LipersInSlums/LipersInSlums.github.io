@@ -7,6 +7,17 @@ import theme from "@/styles/theme";
 import { PageTitleProvider } from "src/hooks/usePageTitle";
 import AppLayout from "src/pages/Layout/AppLayout";
 
+const menu = [
+  {
+    href: "/",
+    label: "Blog",
+  },
+  {
+    href: "/channels",
+    label: "Channels",
+  },
+];
+
 const App: FC<AppProps> = (props) => {
   useEffect(() => {
     import("zenn-embed-elements");
@@ -16,7 +27,7 @@ const App: FC<AppProps> = (props) => {
     <ThemeProvider theme={theme}>
       <PageTitleProvider suffix="LipersInSlums Wiki" delimiter="|">
         <CssBaseline />
-        <AppLayout {...props} />
+        <AppLayout menus={menu} {...props} />
       </PageTitleProvider>
     </ThemeProvider>
   );
