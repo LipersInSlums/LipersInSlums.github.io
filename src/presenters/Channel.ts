@@ -4,35 +4,51 @@ import matter from "gray-matter";
 import { ChannelInfo, parseChannelSchema } from "@/model/Channel";
 import { getFiles } from "@/lib/api";
 
-function parseChannel(channelPath: `_channels/${string}`): ChannelInfo {
+type ChannelPathStr = `_channels/${string}.md`;
+
+function parseChannel(channelPath: ChannelPathStr): ChannelInfo {
   const fullPath = path.resolve(channelPath);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { content, data } = matter(fileContents);
 
-  const name = (fullPath.split("/").pop() ?? "").replace(".md", "");
   const parsed = parseChannelSchema.parse(data);
+  const name =
+    parsed.name ?? (fullPath.split("/").pop() ?? "").replace(".md", "");
 
   return {
     description: parsed.description,
-    name: parsed.name ?? name,
+    name,
     notes: [content],
     refs: parsed.refs ?? [],
     since: parsed.since,
     topic: parsed.topic,
     ignoreList: parsed.ignore_list ?? false,
     order: parsed.order,
-    realPath: path.basename(fullPath),
+    realPath: path.basename(fullPath).replace(".md", ""),
   };
 }
 
 export function getChannelByName(name: string): ChannelInfo {
-  return parseChannel(`_channels/${name}`);
+  try {
+    return parseChannel(`_channels/${name}.md`);
+  } catch {
+    console.log("Channel not found: " + name);
+
+    const channelIndex = channelInfo.findIndex((ch) => ch.name === name);
+    if (channelIndex === -1) {
+      throw new Error(`Channel not found: ${name}`);
+    }
+
+    const channel = channelInfo[channelIndex];
+
+    return { ...channel, realPath: channel.name, order: channelIndex + 1 };
+  }
 }
 
 export function getAllChannels(): ChannelInfo[] {
   const markdownChannelPaths = getFiles("_channels");
-  const markdownChannels = markdownChannelPaths.map((channel) =>
-    getChannelByName(channel),
+  const markdownChannels = markdownChannelPaths.map(
+    (channel) => parseChannel(`_channels/${channel}` as ChannelPathStr), // getFiles で引っ張ってくる path は .md が付いている
   );
 
   return markdownChannels
@@ -107,7 +123,7 @@ const channelInfo: Omit<ChannelInfo, "order" | "realPath">[] = [
       },
       {
         name: "#こりーさんのぺろいわからせ棒",
-        href: "/ChannelsInSlums/こりーさんのぺろいわからせ棒",
+        href: "/channels/こりーさんのぺろいわからせ棒",
       },
     ],
   },
@@ -167,7 +183,7 @@ const channelInfo: Omit<ChannelInfo, "order" | "realPath">[] = [
     refs: [
       {
         name: "ruby-on-rails（金切り声）",
-        href: "/ChannelsInSlums/ruby-on-rails（金切り声）",
+        href: "/channels/ruby-on-rails（金切り声）",
       },
     ],
   },
@@ -251,24 +267,13 @@ const channelInfo: Omit<ChannelInfo, "order" | "realPath">[] = [
     refs: [
       {
         name: "#エロゲ",
-        href: "/ChannelsInSlums/エロゲ",
+        href: "/channels/エロゲ",
       },
       {
         name: "#雀荘『る雀どる』",
-        href: "/ChannelsInSlums/雀荘『る雀どる』",
+        href: "/channels/雀荘『る雀どる』",
       },
     ],
-  },
-  {
-    name: "美容と健康",
-    topic: "",
-    description: "食生活だったりなんだったり色々",
-    since: "2018/07/09",
-    notes: [
-      "ヘルスチャンネル。食事への誘いが行われるのもここ。",
-      "なぜか二つある。",
-    ],
-    refs: [],
   },
   {
     name: "進捗管理",
@@ -376,7 +381,7 @@ const channelInfo: Omit<ChannelInfo, "order" | "realPath">[] = [
     refs: [
       {
         name: "#こりーさんドスケベボディ部",
-        href: "/ChannelsInSlums/こりーさんドスケベボディ部",
+        href: "/channels/こりーさんドスケベボディ部",
       },
     ],
   },
@@ -389,7 +394,7 @@ const channelInfo: Omit<ChannelInfo, "order" | "realPath">[] = [
     refs: [
       {
         name: "じんこうちのう(裏声)",
-        href: "/ChannelsInSlums/じんこうちのう(裏声)",
+        href: "/channels/じんこうちのう(裏声)",
       },
     ],
   },
