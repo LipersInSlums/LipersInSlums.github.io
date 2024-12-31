@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+
 import markdownToHtml from "zenn-markdown-html";
 import { ChannelInfo } from "@/model/Channel";
 
@@ -16,7 +16,7 @@ export default function ChannelsInSlumsIndex(props: Props) {
   return <ChannelsIndex {...props} />;
 }
 
-export const getStaticProps: GetStaticProps<Props, Params> = async () => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const channels = getAllChannels();
   const name = "_index";
   const channel =
