@@ -11,11 +11,11 @@ type Props = {
   content: string;
 };
 
-const ChannelsInSlumsIndex: NextPage<Props> = (props: Props) => {
+const Channels: NextPage<Props> = (props: Props) => {
   return <ChannelPage {...props} />;
 };
 
-export default ChannelsInSlumsIndex;
+export default Channels;
 
 type Params = ParsedUrlQuery & {
   channel: string;
