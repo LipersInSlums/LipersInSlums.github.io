@@ -26,6 +26,9 @@ export default function ChannelList({ channels }: Props) {
 
 const ChannelWrap = styled.ul`
   padding: 0;
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const Item = styled.li`
@@ -33,6 +36,10 @@ const Item = styled.li`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  margin: 10px 0;
+  padding: 5px;
+  background-color: #f8f8f8;
   &::marker {
     content: "";
   }
@@ -43,9 +50,12 @@ const Item = styled.li`
     margin-right: 5px;
     color: gray;
   }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const Description = styled.div`
   font-size: 0.8em;
-  margin-left: 15px;
 `;

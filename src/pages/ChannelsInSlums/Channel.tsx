@@ -61,10 +61,12 @@ export default function Channel({
 const ContentWrap = styled.div`
   display: flex;
   flex-direction: column;
-  min-width: 800px;
+  flex-grow: 1;
+  min-width: 500px;
 
   @media screen and (max-width: 900px) {
     min-width: inherit;
+    width: 100%;
   }
 `;
 
