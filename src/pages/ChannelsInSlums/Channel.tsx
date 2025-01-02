@@ -5,7 +5,6 @@ import { ArrowBack } from "@mui/icons-material";
 import usePageTitle from "src/hooks/usePageTitle";
 type Props = {
   content: string;
-
   description?: string;
   name?: string;
   refs?: { href: string; name: string }[];
