@@ -9,6 +9,7 @@ type Props = {
   channel: ChannelInfo;
   content: string;
   name?: string;
+  showChannels?: boolean;
 };
 
 const ChannelPage: NextPage<Props> = ({
@@ -16,10 +17,11 @@ const ChannelPage: NextPage<Props> = ({
   channels,
   content,
   name = channel.name,
+  showChannels = false,
 }: Props) => {
   return (
     <Wrap>
-      <ListWrap>
+      <ListWrap className={showChannels ? "show-channels" : ""}>
         <ChannelList channels={channels} />
       </ListWrap>
       <ChannelWrap>
@@ -43,20 +45,30 @@ const Wrap = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  text-align: center;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const ListWrap = styled.div`
-  position: sticky;
   top: 30px;
 
   border-top: 2px solid #ddd;
   border-bottom: 2px solid #ddd;
-  max-height: 75vh;
+  min-width: 200px;
   overflow-y: scroll;
+  max-height: 75vh;
+  flex-grow: 1;
 
   @media screen and (max-width: 900px) {
     display: none;
+    width: 100%;
+    max-height: 50vh;
+
+    &.show-channels {
+      display: inherit;
+    }
   }
 `;
 
@@ -64,4 +76,5 @@ const ChannelWrap = styled.div`
   display: flex;
   justify-content: center;
   padding: 0 20px;
+  flex-grow: 3;
 `;

@@ -13,7 +13,13 @@ type Props = {
 };
 
 export default function ChannelsInSlumsIndex(props: Props) {
-  return <ChannelPage name="LipersInSlums サーバーへようこそ" {...props} />;
+  return (
+    <ChannelPage
+      showChannels={true}
+      name="LipersInSlums サーバーへようこそ"
+      {...props}
+    />
+  );
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
