@@ -61,8 +61,6 @@ export default function Channel({
 const ContentWrap = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  min-width: 500px;
 
   @media screen and (max-width: 900px) {
     min-width: inherit;
@@ -75,6 +73,7 @@ const TitleWrap = styled.header`
 
   @media screen and (max-width: 900px) {
     text-align: center;
+    margin-top: 10px;
   }
 `;
 
@@ -85,6 +84,9 @@ const Title = styled.div`
   margin-top: 0.83em;
   text-align: left;
   margin-left: 2em;
+  @media screen and (max-width: 900px) {
+    margin-left: 0;
+  }
 `;
 
 const Name = styled.div`
@@ -106,7 +108,7 @@ const Topic = styled.div`
     position: relative;
     bottom: 2px;
 
-    @media screen and (min-width: 450px) {
+    @media screen and (min-width: 899px) {
       margin-left: 1em;
       margin-right: 1em;
       content: "|";

@@ -52,14 +52,12 @@ const Wrap = styled.div`
 `;
 
 const ListWrap = styled.div`
-  top: 30px;
-
   border-top: 2px solid #ddd;
   border-bottom: 2px solid #ddd;
-  min-width: 200px;
   overflow-y: scroll;
   max-height: 75vh;
-  flex-grow: 1;
+  width: 250px;
+  min-width: 250px;
 
   @media screen and (max-width: 900px) {
     display: none;
@@ -73,8 +71,6 @@ const ListWrap = styled.div`
 `;
 
 const ChannelWrap = styled.div`
-  display: flex;
-  justify-content: center;
   padding: 0 20px;
-  flex-grow: 3;
+  flex-grow: 1;
 `;
