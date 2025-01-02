@@ -8,12 +8,14 @@ type Props = {
   channels: ChannelInfo[];
   channel: ChannelInfo;
   content: string;
+  name?: string;
 };
 
 const ChannelPage: NextPage<Props> = ({
   channel,
   channels,
   content,
+  name = channel.name,
 }: Props) => {
   return (
     <Wrap>
@@ -24,7 +26,7 @@ const ChannelPage: NextPage<Props> = ({
         <Channel
           content={content}
           description={channel.description}
-          name={channel.name}
+          name={name}
           refs={channel.refs}
           since={channel.since}
           topic={channel.topic}
