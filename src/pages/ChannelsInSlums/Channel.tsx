@@ -105,14 +105,11 @@ const Topic = styled.div`
 
   &:before {
     color: gray;
-    position: relative;
     bottom: 2px;
 
-    @media screen and (min-width: 899px) {
-      margin-left: 1em;
-      margin-right: 1em;
-      content: "|";
-    }
+    margin-right: 1em;
+    margin-left: 5px;
+    content: "|";
   }
 `;
 
