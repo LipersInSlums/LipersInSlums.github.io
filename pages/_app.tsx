@@ -1,8 +1,8 @@
+import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import type { FC } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
-import type { AppProps } from "next/app";
 import theme from "@/styles/theme";
 import { PageTitleProvider } from "src/hooks/usePageTitle";
 import AppLayout from "src/pages/Layout/AppLayout";

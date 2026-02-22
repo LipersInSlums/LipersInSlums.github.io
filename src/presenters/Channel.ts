@@ -1,8 +1,8 @@
-import path from "path";
 import fs from "fs";
+import path from "path";
 import matter from "gray-matter";
-import { ChannelInfo, parseChannelSchema } from "@/model/Channel";
 import { getFiles } from "@/lib/api";
+import { ChannelInfo, parseChannelSchema } from "@/model/Channel";
 
 type ChannelPathStr = `_channels/${string}.md`;
 
@@ -405,12 +405,12 @@ const channelInfo: Omit<ChannelInfo, "order" | "realPath">[] = [
     since: "2021/06/13",
     notes: [
       "音楽、絵画、酒、ボドゲなどの文化的な諸々に関するチャンネル。",
-      "派生サイトとして、住民が各々のオススメ音源を紹介するConsense(旧Scrapbox)がある(下記の外部リンク参照)。"
+      "派生サイトとして、住民が各々のオススメ音源を紹介するConsense(旧Scrapbox)がある(下記の外部リンク参照)。",
     ],
     refs: [
       {
         name: "音楽のすゝめ",
-        href: "https://scrapbox.io/music-recommendation/"
+        href: "https://scrapbox.io/music-recommendation/",
       },
     ],
   },

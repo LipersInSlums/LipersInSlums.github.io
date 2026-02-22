@@ -1,5 +1,3 @@
-import { randomBytes } from "crypto";
-import styled from "@emotion/styled";
 import Document, {
   Html,
   Head,
@@ -7,6 +5,8 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
+import { randomBytes } from "crypto";
+import styled from "@emotion/styled";
 
 type WithNonceProps = {
   readonly nonce: string;

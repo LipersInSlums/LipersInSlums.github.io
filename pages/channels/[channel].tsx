@@ -1,9 +1,9 @@
-import { ParsedUrlQuery } from "querystring";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { ParsedUrlQuery } from "querystring";
 import markdownToHtml from "zenn-markdown-html";
 import { ChannelInfo } from "@/model/Channel";
-import { getAllChannels, getChannelByName } from "src/presenters/Channel";
 import ChannelPage from "src/pages/ChannelsInSlums/ChannelPage";
+import { getAllChannels, getChannelByName } from "src/presenters/Channel";
 
 type Props = {
   channels: ChannelInfo[];

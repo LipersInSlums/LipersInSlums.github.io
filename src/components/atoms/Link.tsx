@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import NextLink from "next/link";
+import styled from "@emotion/styled";
 
 const Link = styled(NextLink)`
   color: #333;

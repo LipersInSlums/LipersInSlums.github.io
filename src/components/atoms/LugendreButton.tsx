@@ -1,5 +1,5 @@
+import { JSX, PropsWithChildren } from "react";
 import styled from "@emotion/styled";
-import { PropsWithChildren } from "react";
 
 type Props = Omit<
   PropsWithChildren<JSX.IntrinsicElements["button"]>,
