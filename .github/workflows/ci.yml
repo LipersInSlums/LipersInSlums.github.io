@@ -26,7 +26,7 @@ jobs:
       - name: Lint & Type check
         run: yarn lint && yarn type-check
       - name: Build
-        run: yarn build && yarn export
+        run: yarn build
       - name: add nojekyll
         run: touch ./out/.nojekyll
       - name: Archive artifacts
