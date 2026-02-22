@@ -10,7 +10,6 @@ export default function useLastOnScreen<
   const elements = useMemo(
     () =>
       Array.from(targetRef.current?.querySelectorAll(elementSelector) ?? []),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [targetRef.current, elementSelector],
   );
 

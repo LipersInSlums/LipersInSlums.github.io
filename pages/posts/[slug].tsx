@@ -1,18 +1,16 @@
-import { ParsedUrlQuery } from "querystring";
-import { useRouter } from "next/router";
-import ErrorPage from "next/error";
-import markdownToHtml from "zenn-markdown-html";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import styled from "@emotion/styled";
+import ErrorPage from "next/error";
+import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
-import { getAllPosts, getPostBySlug } from "@/lib/api";
-
-import { PostOGP } from "@/components/common/PostOGP";
-
-import usePageTitle from "src/hooks/usePageTitle";
-import { Post } from "@/model/Post";
+import { ParsedUrlQuery } from "querystring";
+import markdownToHtml from "zenn-markdown-html";
+import styled from "@emotion/styled";
 import HeadingList from "@/components/common/HeadingList";
+import { PostOGP } from "@/components/common/PostOGP";
+import { getAllPosts, getPostBySlug } from "@/lib/api";
+import { Post } from "@/model/Post";
 import useLastOnScreen from "src/hooks/useLastOnScreen";
+import usePageTitle from "src/hooks/usePageTitle";
 
 type Props = {
   readonly post: Post;

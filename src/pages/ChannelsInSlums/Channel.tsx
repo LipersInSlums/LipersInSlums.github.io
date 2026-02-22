@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
 import Link from "next/link";
 import { format } from "date-fns";
+import styled from "@emotion/styled";
 import { ArrowBack } from "@mui/icons-material";
 import usePageTitle from "src/hooks/usePageTitle";
 type Props = {

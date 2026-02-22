@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import PostListItem from "./PostListItem";
 import { Post } from "@/pages/api/posts";
 import usePageTitle from "src/hooks/usePageTitle";
+import PostListItem from "./PostListItem";
 
 type Props = {
   posts: Post[];

@@ -1,8 +1,8 @@
 import * as fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { RawPost, Post, parsePostSchema } from "@/model/Post";
 import parseHeadings from "@/lib/parseHeadings";
+import { RawPost, Post, parsePostSchema } from "@/model/Post";
 type MarkdownDir = "_posts" | "_channels";
 
 type MarkDownBaseName = `${string}.md`;

@@ -2,9 +2,8 @@ import type { AppProps } from "next/app";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { Container } from "@mui/material";
-
-import { Copyright } from "@/components/templates/materials";
 import LisperInSlumsLogo from "@/components/atoms/LisperInSlumsLogo.svg";
+import { Copyright } from "@/components/templates/materials";
 
 type Menu = {
   href: string;

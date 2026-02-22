@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import Typography from "@mui/material/Typography";
 import MuiLink from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
 
 export const Copyright: FC = () => {
   return (
